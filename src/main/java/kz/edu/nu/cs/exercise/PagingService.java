@@ -22,19 +22,24 @@ public class PagingService {
     }
 
     @GET
-    public Response getMyList(@QueryParam("size") int size) {
+    public Response getMyList(@QueryParam("size") int size, @QueryParam("offset") int offset) {
         Gson gson = new Gson();
         String json;
         
         PagedHelper p = new PagedHelper();
+        if(offset + size <= list.size()) {
+            p.setNext("Next page ");
+        }
+        if(offset > 0) {
+            p.setPrev("Prev page ");
+        }
         if (size == 0) {
             p.setList(list);
-        } else {
-            p.setList(list.subList(0, size));
+        } else if (offset + size <= list.size() && offset >= 0){
+            p.setList(list.subList(offset, offset + size));
         }
-
-        p.setNext("next url (from Paging Service)");
-        p.setPrev("prev url (from Paging Service)");
+        
+        
         
         json = gson.toJson(p, PagedHelper.class);
         
