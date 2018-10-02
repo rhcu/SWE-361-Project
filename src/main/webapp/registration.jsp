@@ -39,18 +39,6 @@ div.ex {
 					<td>Age</td>
 					<td><input type="text" name="age" /></td>
 				</tr>
-				<tr>
-					<td>Qualification</td>
-					<td><input type="text" name="qual" /></td>
-				</tr>
-				<tr>
-					<td>Percentage</td>
-					<td><input type="text" name="percent" /></td>
-				</tr>
-				<tr>
-					<td>Year Passed</td>
-					<td><input type="text" name="yop" /></td>
-				</tr>
 			</table>
 			<input type="submit" value="register" />
 		</form>
