@@ -8,7 +8,7 @@
 <style>
 table#nat{
 	width: 50%;
-	background-color: #c48ec5;
+	background-color: #3AC6AA;
 }
 </style>
 </head>
