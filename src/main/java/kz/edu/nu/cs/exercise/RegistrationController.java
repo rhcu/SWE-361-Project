@@ -22,14 +22,16 @@ public class RegistrationController extends HttpServlet {
   // TODO Auto-generated method stub
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
-  String name = request.getParameter("fullname");
+  String firstname = request.getParameter("firstname");
+
+  String lastname = request.getParameter("lastname");
   String userName = request.getParameter("userName");
   String pass = request.getParameter("pass");
   String addr = request.getParameter("address");
   String age = request.getParameter("age");
 
   // validate given input
-  if (name.isEmpty() || addr.isEmpty() || age.isEmpty() ) {
+  if (firstname.isEmpty() || lastname.isEmpty() || addr.isEmpty() || age.isEmpty() ) {
    RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
    out.println("<font color=red>Please fill all the fields</font>");
    rd.include(request, response);
@@ -47,11 +49,12 @@ public class RegistrationController extends HttpServlet {
 
     PreparedStatement ps = con.prepareStatement(query); // generates sql query
 
-    ps.setString(1, name);
-    ps.setString(2, userName);
-    ps.setString(3, pass);
-    ps.setString(4, addr);
-    ps.setInt(5, Integer.parseInt(age));
+    ps.setString(1, firstname);
+    ps.setString(2, lastname);
+    ps.setString(3, userName);
+    ps.setString(4, pass);
+    ps.setString(5, addr);
+    ps.setInt(6, Integer.parseInt(age));
 
 
     ps.executeUpdate(); // execute it on test database
