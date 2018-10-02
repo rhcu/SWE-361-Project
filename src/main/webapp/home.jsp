@@ -14,7 +14,8 @@ table#nat{
 </head>
 <body>  
 <% 
-	String name =  request.getParameter("fullname");
+	String firstname =  request.getParameter("firstname");
+	String lastname = request.getParameter("lastname");
 	String userName = request.getParameter("userName");
 	String pass = request.getParameter("pass");
 	String addr = request.getParameter("address");
@@ -23,8 +24,12 @@ table#nat{
 %>
 <table id ="nat">
 <tr>
-	<td>Full Name</td>
-	<td><%= name %></td>
+	<td>First Name</td>
+	<td><%= firstname %></td>
+</tr>
+<tr>
+	<td>Last Name</td>
+	<td><%= lastname %></td>
 </tr>
 <tr>
 	<td>User Name</td>

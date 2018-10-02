@@ -20,8 +20,12 @@ div.ex {
 		<form action="RegistrationController" method="post">
 			<table style="with: 50%">
 				<tr>
-					<td>Full Name</td>
-					<td><input type="text" name="fullname" /></td>
+					<td>First Name</td>
+					<td><input type="text" name="firstname" /></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" name="lastname" /></td>
 				</tr>
 				<tr>
 					<td>Username</td>
