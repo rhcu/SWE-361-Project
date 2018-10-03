@@ -39,6 +39,10 @@ table#nat{
 	<td>Address</td>
 	<td><%= addr %></td>
 </tr>
+<tr>
+	<td>Age</td>
+	<td><%= age %></td>
+</tr>
 
 </table>
 <br>
