@@ -10,10 +10,6 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
 
@@ -65,10 +61,9 @@
           <li><a href="#pricing">Pricing</a></li>
           <li class="menu-has-children"><a href="">Drop Down</a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
+              <li><a href="#">Example 1</a></li>
+              <li><a href="#">Example 2</a></li>
+              <li><a href="#">Example 3</a></li>
             </ul>
           </li>
           <li><a href="#blog">Blog</a></li>
@@ -77,6 +72,17 @@
       </nav><!-- #nav-menu-container -->
     </div>
   </header><!-- #header -->
+  <br>
+  <br>
+  <br>
+<section id="hero" class="wow fadeIn">
+    <div class="hero-container">
+      <h1>Welcome to CVBuilder!</h1>
+      <img src="img/hero-img.png" alt="Hero Imgs">
+      </div>
+    </div>
+  </section><!-- #hero -->
+
 
 
 <% 
@@ -90,7 +96,8 @@
 %>
 <br>
 <br>
-<h2>Hi, <%= firstname %>. Happy to see you here!</h2>
+
+      <h2>Hi, <%= firstname %>. Happy to see you here!</h2>
 <ul id ="nat">
 <li>
 	<p>First Name: <%= firstname %></p>
