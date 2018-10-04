@@ -32,32 +32,43 @@ body {
 	padding: 0;
 	width: 100%;
 	text-align: center;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+	background: url("https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-0.3.5&s=a8ce5bf203fdaf826d2db0b2d8d51544&auto=format&fit=crop&w=1500&q=80");
 }
 
 ul#nat li {
 	list-style-type: none;
 	display: inline-block;
+	color: white;
+	font-size: 20px;
+	padding: 20px;
 }
 section.registerform {
 	text-align: center;
-	padding-top: 30px;
+	margin-top: 350px;
 }
 div.ex{
-	border: 1px solid #26AEF2;
+	border: 2px solid #26AEF2;
 	border-radius: 10px;
-	margin-left: 20%;
-	margin-right: 20%;
+/* 	margin-left: 20%;
+	margin-right: 20%; */
 	text-align: center;
+	width: 50%;
+	margin:0 auto;
 }
 h1 {
 	color: #26AEF2;
+}
+.btn{
+	background-color: #26AEF2;
+	color: white;
 }
 
 </style>
 <body>
 
   <section class="registerform">
-  <h1>Registration Form</h1>
 	<div class="ex">
 		<form action="RegistrationController" method="post">
 			<ul id="nat">
@@ -83,18 +94,20 @@ h1 {
 					<li>Photo</li>
 					<li><input type="file" name="photo" /></li>
 				</div>	
-			</ul>		
-			<input type="submit" value="Register" />
-		</form>
+			</ul>
+			<button type="button" class="btn">Register</button>		
+<!-- 			<input type="submit" value="Register" />
+ -->		</form>
 		<br>
   </section>
-
+<!-- 
 	
 	create a student table in test database before registering this form
 		<br> Syntax : <br>
 		<i>create table student(name varchar(100), userName varchar(100), pass varchar(100), addr varchar(100), age int, qual varchar(100), percent varchar(100), year varchar(100));</i>
 		
-		
+		 -->
 	</div>
+	
 </body>
 </html>
