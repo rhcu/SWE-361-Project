@@ -149,7 +149,8 @@ ul#nat li {
   </div>
 </div>
 <br>
-<button class="btn">Logout</button>
+<button class="btn" type="submit" value="logout">Logout</button>
+
 <br>
 use " <i> select * from student; </i> " in mysql client to verify it.
 </body>
