@@ -42,6 +42,14 @@
   padding: 5px;
 }
 
+.imagecircle {
+	border-radius: 50%
+}
+
+ul#nat li {
+	list-style-type: none;
+}
+
 
 </style>
 </head>
@@ -122,6 +130,9 @@
 <li>
 	<p>Age: <%= age %></p>
 
+</li>
+<li>
+	<img src="img/profile.png" class="imagecircle" alt="profile image" width="100" height="100">
 </li>
 
 </ul>
