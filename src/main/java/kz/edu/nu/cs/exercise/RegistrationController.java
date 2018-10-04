@@ -45,7 +45,7 @@ public class RegistrationController extends HttpServlet {
 
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root"); 
 
-    String query = "insert into student values(?,?,?,?,?)";
+    String query = "insert into student values(?,?,?,?,?,?)";
 
     PreparedStatement ps = con.prepareStatement(query); // generates sql query
 
