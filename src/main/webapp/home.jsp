@@ -29,7 +29,10 @@
 
 <title>Display</title>
 <style>
-
+.btn {
+        background-color:red;
+        cursor:pointer;
+    }
 .row {
   display: flex;
 }
@@ -133,6 +136,8 @@
 	<img src="img/Example3.png" alt="The 3rd example" width="200px" height="400px">
   </div>
 </div>
+<br>
+<button class="btn">Logout</button>
 <br>
 use " <i> select * from student; </i> " in mysql client to verify it.
 </body>
