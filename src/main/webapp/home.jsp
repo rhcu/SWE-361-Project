@@ -51,7 +51,8 @@
 
       <div id="logo" class="pull-left">
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+        <img src="img/logo.png" width="180" height="60" alt="">
+        
       </div>
 
       <nav id="nav-menu-container">
