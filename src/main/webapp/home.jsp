@@ -42,6 +42,14 @@
   padding: 5px;
 }
 
+.imagecircle {
+	border-radius: 50%
+}
+
+ul#nat li {
+	list-style-type: none;
+}
+
 
 </style>
 </head>
@@ -51,7 +59,8 @@
 
       <div id="logo" class="pull-left">
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+        <img src="img/logo.png" width="180" height="60" alt="">
+        
       </div>
 
       <nav id="nav-menu-container">
@@ -121,6 +130,9 @@
 <li>
 	<p>Age: <%= age %></p>
 
+</li>
+<li>
+	<img src="img/profile.png" class="imagecircle" alt="profile image" width="100" height="100">
 </li>
 
 </ul>
