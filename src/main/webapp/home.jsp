@@ -24,6 +24,14 @@ table#nat{
 %>
 <table id ="nat">
 <tr>
+	<td>
+		<c:if test="${not empty param.error}" >
+			<%= request.getParameter("error") %>
+			
+		</c:if>
+	</td>
+</tr>
+<tr>
 	<td>First Name</td>
 	<td><%= firstname %></td>
 </tr>
