@@ -95,8 +95,9 @@ h1 {
 					<li><input type="file" name="photo" /></li>
 				</div>	
 			</ul>
-			<button type="button" class="btn">Register</button>		
-<!-- 			<input type="submit" value="Register" />
+			<input type="submit" class="btn" value="Register" />		
+<!-- 			
+<button type="button" class="btn">Register</button>
  -->		</form>
 		<br>
   </section>

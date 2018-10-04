@@ -40,8 +40,8 @@ public class RegistrationController extends HttpServlet {
 	 String firstname = request.getParameter("firstname");
 
 	 String lastname = request.getParameter("lastname");
-	 String userName = request.getParameter("userName");
-	 String pass = request.getParameter("pass");
+	 String userName = request.getParameter("username");
+	 String pass = request.getParameter("password");
 	 String addr = request.getParameter("address");
 	 String age = request.getParameter("age");
 	
