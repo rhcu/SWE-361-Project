@@ -84,7 +84,7 @@ h1 {
 					<li>Username</li>
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
-					<li><input type="text" name="password" /></li>
+					<li><input type="password" name="password" /></li>
 				</div>
 				<div>
 					<li>Address</li>
@@ -92,10 +92,6 @@ h1 {
 					<li>Age</li>
 					<li><input type="text" name="age" /></li>
 				</div>
-				<div>
-					<li>Photo</li>
-					<li><input type="file" name="photo" /></li>
-				</div>	
 			</ul>
 			<input type="submit" class="btn" value="Register" />		
 <!-- 			

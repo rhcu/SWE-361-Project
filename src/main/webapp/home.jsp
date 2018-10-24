@@ -100,7 +100,7 @@ ul#nat li {
 <% 
 	String firstname =  request.getParameter("firstname");
 	String lastname = request.getParameter("lastname");
-	String userName = request.getParameter("userName");
+	String userName = request.getParameter("username");
 	String pass = request.getParameter("pass");
 	String addr = request.getParameter("address");
 	String age = request.getParameter("age");
@@ -139,7 +139,7 @@ ul#nat li {
 <p><u>Some examples of templates that you can use: </u></p>
 <div class="row">
   <div class="column">
-  <img src="img/Example1.png" alt="The 1st example" width="200px" height="400px">
+  <a href="latexresume?username=<%=userName%>"><img src="img/Example1.png" alt="The 1st example" width="200px" height="400px"></a>
   </div>
   <div class="column">
 	<img src="img/Example2.png" alt="The 2nd example" width="200px" height="400px">
