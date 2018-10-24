@@ -29,6 +29,10 @@
 
 <title>Display</title>
 <style>
+body {
+text-align: center;
+}
+
 .btn {
         background-color:red;
         cursor:pointer;
@@ -48,6 +52,14 @@
 
 ul#nat li {
 	list-style-type: none;
+/* 	font-size: 20px;	
+ */}
+
+.bio {
+	background-color: #26AEF2;
+	display: inline-block;
+	padding: 20px;
+	width: 80%;
 }
 
 
@@ -110,15 +122,18 @@ ul#nat li {
 <br>
 
       <h2>Hi, <%= firstname %>. Happy to see you here!</h2>
+      <div class="bio">
 <ul id ="nat">
+<div>
 <li>
 	<p>First Name: <%= firstname %></p>
 	
 </li>
 <li>
 	<p>Last Name: <%= lastname %></p>
-	
 </li>
+</div>
+<div>
 <li>
 	<p>User Name: <%= userName %></p>
 	
@@ -131,11 +146,13 @@ ul#nat li {
 	<p>Age: <%= age %></p>
 
 </li>
-<li>
+</div>
+<!-- <li>
 	<img src="img/profile.png" class="imagecircle" alt="profile image" width="100" height="100">
 </li>
-
+ -->
 </ul>
+</div>
 <p><u>Some examples of templates that you can use: </u></p>
 <div class="row">
   <div class="column">
@@ -149,8 +166,10 @@ ul#nat li {
   </div>
 </div>
 <br>
+<a href="/fields.jsp"><button class="btn">Try samples now</button></a>
 <button class="btn">Logout</button>
 <br>
 use " <i> select * from student; </i> " in mysql client to verify it.
+
 </body>
 </html>
