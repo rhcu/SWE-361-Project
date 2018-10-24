@@ -25,9 +25,6 @@ public class RegistrationController extends HttpServlet {
  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   
 	 try {
-         // The newInstance() call is a work around for some
-         // broken Java implementations
-
          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
      } catch (Exception ex) {
          // handle the errorr
@@ -81,25 +78,16 @@ public class RegistrationController extends HttpServlet {
 			    System.out.println("SQLState: " + ex.getSQLState());
 			    System.out.println("VendorError: " + ex.getErrorCode());
 			    RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
-				//System.out.println("<font color=red>Please fill all the fields</font>");
-			    request.setAttribute("error", ex.getMessage());
+				request.setAttribute("error", ex.getMessage());
 			    out.println("<font color=red>" + ex.getMessage() + "</font>");
 				rd.include(request, response);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
-			//System.out.println("<font color=red>Please fill all the fields</font>");
-		    out.println("<font color=red>" + e.getMessage() + "</font>");
+			out.println("<font color=red>" + e.getMessage() + "</font>");
 			rd.include(request, response);
-		}
-	// inserting data into mysql database 
-	   // create a test database and student table before running this to create table
-	   //create table student(name varchar(100), userName varchar(100), pass varchar(100), addr varchar(100), age int, qual varchar(100), percent varchar(100), year varchar(100));
-		
+		}	
 	}
-
-
  }
 }
 
