@@ -1,6 +1,7 @@
 package kz.edu.nu.cs.exercise;
 import java.sql.DriverManager;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
@@ -31,14 +32,13 @@ public class RegistrationController extends HttpServlet {
          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
      } catch (Exception ex) {
          // handle the errorr
-    	 System.out.println("AAAAA");
     	 System.out.println(ex.getMessage());
      }
 	 
 	 Connection conn = null;
 	 PrintWriter out = response.getWriter();
 	 String firstname = request.getParameter("firstname");
-
+	 
 	 String lastname = request.getParameter("lastname");
 	 String userName = request.getParameter("username");
 	 String pass = request.getParameter("password");
@@ -53,6 +53,7 @@ public class RegistrationController extends HttpServlet {
 	  } else {
 	   
 		 try {
+			    
 			conn = DriverManager.getConnection(Config.getUrlMySQL());
 			String query = "insert into student(name, lastname, username, pass, addr, age) values(?,?,?,?,?,?)";
 	
