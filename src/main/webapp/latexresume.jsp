@@ -58,7 +58,7 @@ ul#nat li {
 
 experience_num = 1;
 education_num = 1;
-
+project_num = 1;
 function addExperienceField(){
 	var v = experience_num.toString();
 	$("#education").append("<input width='100%' class='form-control' type='text' name='title-"+v+"' placeholder='Title'><br>");
@@ -74,15 +74,25 @@ function addEducationField(){
 	$("#experience").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
 	$("#experience").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
 	$("#experience").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
 	$("#experience").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
 	$("#experience").append("<hr>");
 	education_num += 1;
+}
+function addProjectField(){
+	var v = project_num.toString();
+	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-name-"+v+"' placeholder='Name'><br>");
+	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-url-"+v+"' placeholder='URL to project (optional)'><br>");
+	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-dates-"+v+"' placeholder='Dates of creation'><br>");
+	$("#projects").append("<textarea width='100%' class='form-control' name='project-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
+	$("#projects").append("<hr>");
+	project_num += 1;
 }
 
 $( document ).ready(function() {
     addExperienceField();
     addEducationField();
+    addProjectField();
 });
 </script>
 </head>
@@ -157,8 +167,12 @@ $( document ).ready(function() {
 <br>
 <div id = "experience">
 </div>
-<br>
 <input class="btn btn-info"  type="button" value="Add experience" onclick="addExperienceField()">
+<br>
+<div id="projects">
+</div>
+<br>
+<input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">
 <br>
 <input class="btn btn-success" type="submit" value="Convert to PDF">
 </form>

@@ -51,7 +51,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			 String num = Integer.toString(i);
 			 String school = request.getParameter("school-" + num);
 			 String degree = request.getParameter("degree-" + num);
-			 String dates = request.getParameter("dates-" + num);
+			 String dates = request.getParameter("ed-dates-" + num);
 			 String description = request.getParameter("ed-description-" + num);
 			 String major = request.getParameter("major-" + num);
 			 if(school != null && degree != null && dates!= null && major != null) {
@@ -85,7 +85,31 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		 }
 		
 		main += "\\end{rSection}\n";
+		
+		main += "\\begin{rSection}{Projects}";
+		
+		for(int i = 1; i < 100; i++) {
+			 String num = Integer.toString(i);
+			 String name = request.getParameter("project-name-" + num);
+			 String dates = request.getParameter("project-dates-" + num);
+			 String URL = request.getParameter("project-url-" + num);
+			 String description = request.getParameter("project-description-" + num);
+			 
+			 if(name != null && dates!= null && description != null) {
+				 if(URL == null) URL = "";
+				 main += "\\begin{rSubsection}{"+name+"}{\\url{"+URL
+				 		+ "}}{"+dates+"}{}\n" + 
+				 		description+"\\end{rSubsection}";
+			 }else {
+				 break;
+			 }
+		}
+		
+		main += "\\end{rSection}\n";
+		
 		main += this.foot;
+		
+		System.out.println(main);
 	
 		String pdf = generate(main);
 		
@@ -139,7 +163,6 @@ protected String generate(String main) throws IOException, InterruptedException 
 	 Runtime rt = Runtime.getRuntime();
 	 String basePath = getServletContext().getRealPath("/");
 	 String ex = "curl -L https://raw.githubusercontent.com/aslushnikov/latex-online/master/util/latexonline";
-	 System.out.println(ex);
 	 Process pr = rt.exec(ex);
 	 
 	 String line;
@@ -157,7 +180,7 @@ protected String generate(String main) throws IOException, InterruptedException 
 	 pr = rt.exec("chmod 755 "+laton);
 	 input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 	 while ((line = input.readLine()) != null) {
-	    System.out.println(line);
+	    //System.out.println(line);
 	  }
 	 
 	 //pr.wait();
@@ -167,7 +190,7 @@ protected String generate(String main) throws IOException, InterruptedException 
 	 System.out.println(basePath);
 	 input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 	 while ((line = input.readLine()) != null) {
-	    System.out.println(line);
+	    //System.out.println(line);
 	    laton_content += line + "\n";
 	  }
 	 //pr.wait();
