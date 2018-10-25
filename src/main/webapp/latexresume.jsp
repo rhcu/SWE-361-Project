@@ -61,22 +61,22 @@ education_num = 1;
 project_num = 1;
 function addExperienceField(){
 	var v = experience_num.toString();
-	$("#education").append("<input width='100%' class='form-control' type='text' name='title-"+v+"' placeholder='Title'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
-	$("#education").append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
-	$("#education").append("<hr>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='title-"+v+"' placeholder='Title'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
+	$("#experience").append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
+	$("#experience").append("<hr>");
 	experience_num += 1;
 }
 function addEducationField(){
 	var v = education_num.toString();
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
-	$("#experience").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
-	$("#experience").append("<hr>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
+	$("#education").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
+	$("#education").append("<hr>");
 	education_num += 1;
 }
 function addProjectField(){
@@ -90,8 +90,8 @@ function addProjectField(){
 }
 
 $( document ).ready(function() {
+	addEducationField();
     addExperienceField();
-    addEducationField();
     addProjectField();
 });
 </script>
