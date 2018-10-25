@@ -137,15 +137,16 @@ ul#nat li {
 
 </ul>
 <p><u>Some examples of templates that you can use: </u></p>
+<b><i>TRY AND CLICK THE TEMPLATE YOU LIKED TO START MAKING A CV</i></b>
 <div class="row">
   <div class="column">
   <a href="latexresume?username=<%=userName%>"><img src="img/Example1.png" alt="The 1st example" width="200px" height="400px"></a>
   </div>
-  <div class="column">
-	<img src="img/Example2.png" alt="The 2nd example" width="200px" height="400px">
+  <div class="column">  
+	<a href="latexresume?username=<%=userName%>"><img src="img/Example2.png" alt="The 2nd example" width="200px" height="400px"></a>
   </div>
   <div class="column">
-	<img src="img/Example3.png" alt="The 3rd example" width="200px" height="400px">
+	<a href="latexresume?username=<%=userName%>"><img src="img/Example3.png" alt="The 3rd example" width="200px" height="400px"></a>
   </div>
 </div>
 <br>
