@@ -35,6 +35,7 @@ body {
 	background-repeat: no-repeat;
     background-attachment: fixed;
 	background: url("https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-0.3.5&s=a8ce5bf203fdaf826d2db0b2d8d51544&auto=format&fit=crop&w=1500&q=80");
+
 }
 
 ul#nat li {
@@ -59,6 +60,17 @@ div.ex{
 	background-color: black;
  	opacity: 0.6;
 }
+section.registerform {
+	text-align: center;
+	padding-top: 30px;
+}
+div.ex{
+	border: 1px solid #26AEF2;
+	border-radius: 10px;
+	margin-left: 20%;
+	margin-right: 20%;
+	text-align: center;
+}
 h1 {
 	color: #26AEF2;
 }
@@ -67,10 +79,13 @@ h1 {
 	color: white;
 }
 
+
 </style>
 <body>
 
   <section class="registerform">
+
+  <h1>Registration Form</h1>
 	<div class="ex">
 		<form action="RegistrationController" method="post">
 			<ul id="nat">
@@ -85,6 +100,7 @@ h1 {
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
 					<li><input type="password" name="password" /></li>
+					<li><input type="text" name="password" /></li>
 				</div>
 				<div>
 					<li>Address</li>
@@ -100,6 +116,17 @@ h1 {
 		<br>
   </section>
 <!-- 
+=======
+				<div>
+					<li>Photo</li>
+					<li><input type="file" name="photo" /></li>
+				</div>	
+			</ul>		
+			<input type="submit" value="Register" />
+		</form>
+		<br>
+  </section>
+
 	
 	create a student table in test database before registering this form
 		<br> Syntax : <br>
