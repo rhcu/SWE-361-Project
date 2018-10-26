@@ -123,13 +123,33 @@ $( document ).ready(function() {
 
 
 <% 
-	String firstname = request.getAttribute("firstname").toString();
+	String  firstname = "";
+	if (request.getAttribute("firstname") != null) {
+		firstname = request.getAttribute("firstname").toString();
+	}
 	//String firstname =  request.getParameter("firstname");
-	String lastname = request.getAttribute("secondname").toString();
-	String userName = request.getAttribute("userName").toString();
-	String addr = request.getAttribute("addr").toString();
-	String age = request.getAttribute("age").toString();
+	String lastname = "";
+	if (request.getAttribute("secondname") != null) {
+		lastname = request.getAttribute("secondname").toString();
+	}
+			
+	String userName = "";
+	if (request.getAttribute("userName") != null) {
+		userName = request.getAttribute("userName").toString();
+	}
 	
+	String addr = "";
+	
+	if (request.getAttribute("addr") != null) {
+		addr = request.getAttribute("addr").toString();
+	}
+			
+	String age = "";
+	
+	if (request.getAttribute("age") != null) {
+		age = request.getAttribute("age").toString();
+	}
+ 	
 %>
 <br>
 <br>

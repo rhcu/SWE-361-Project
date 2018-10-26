@@ -169,10 +169,7 @@ ul#nat li {
 <br>
 <button class="btn" type="submit" value="logout">Logout</button>
 
-<a href="/fields.jsp"><button class="btn">Try samples now</button></a>
-
-<a href="/pagingexercise361/fields.jsp"><button class="btn">Try samples now</button></a>
-<button class="btn">Logout</button>
+<a href="/pagingexercise361/latexresume.jsp"><button class="btn">Try samples now</button></a>
 <br>
 use " <i> select * from student; </i> " in mysql client to verify it.
 
