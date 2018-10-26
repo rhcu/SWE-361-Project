@@ -57,7 +57,6 @@ div.ex{
 	width: 50%;
 	margin:0 auto;
 	background-color: black;
-<<<<<<< HEAD
  	opacity: 0.6;
 
 }
@@ -65,18 +64,7 @@ section.registerform {
 	text-align: center;
 	margin-top: 350px;
 }
-div.ex{
-	border: 2px solid #26AEF2;
-	border-radius: 10px;
-/* 	margin-left: 20%;
-	margin-right: 20%; */
-	text-align: center;
-	width: 50%;
-	margin:0 auto;
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
-	opacity: 0.6;
-}
+
 h1 {
 	color: #26AEF2;
 }
@@ -85,20 +73,14 @@ h1 {
 	color: white;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
 </style>
 <body>
 
   <section class="registerform">
-<<<<<<< HEAD
 
   <h1>Registration Form</h1>
 
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
 	<div class="ex">
 		<form action="RegistrationController" method="post">
 			<ul id="nat">
@@ -112,10 +94,9 @@ h1 {
 					<li>Username</li>
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
-<<<<<<< HEAD
+
 					<li><input type="password" name="password" /></li>
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
+
 					<li><input type="text" name="password" /></li>
 				</div>
 				<div>
@@ -124,7 +105,6 @@ h1 {
 					<li>Age</li>
 					<li><input type="text" name="age" /></li>
 				</div>
-<<<<<<< HEAD
 			</ul>
 			<input type="submit" class="btn" value="Register" />		
 <!-- 			
@@ -134,8 +114,6 @@ h1 {
   </section>
 <!-- 
 
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
 				<div>
 					<li>Photo</li>
 					<li><input type="file" name="photo" /></li>

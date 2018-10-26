@@ -167,12 +167,10 @@ ul#nat li {
   </div>
 </div>
 <br>
-<<<<<<< HEAD
 <button class="btn" type="submit" value="logout">Logout</button>
 
 <a href="/fields.jsp"><button class="btn">Try samples now</button></a>
-=======
->>>>>>> 383c90751c723590f937debdfb122aca1023b019
+
 <a href="/pagingexercise361/fields.jsp"><button class="btn">Try samples now</button></a>
 <button class="btn">Logout</button>
 <br>
