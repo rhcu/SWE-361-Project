@@ -70,32 +70,24 @@ h1 {
 </style>
 <body>
 
-  <section class="registerform">
+  <section class="loginform">
 	<div class="ex">
-		<form action="RegistrationController" method="post">
+		<form action="LoginController" method="post">
 			<ul id="nat">
-				<div id="1">
-					<li>First Name</li>
-					<li><input type="text" name="firstname" /></li>
-					<li>Last Name</li>
-					<li><input type="text" name="lastname" /></li>
-				</div>
 				<div>
 					<li>Username</li>
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
-					<li><input type="password" name="password" /></li>
+					<li><input type="text" name="password" /></li>
 				</div>
-				<div>
-					<li>Address</li>
-					<li><input type="text" name="address" /></li>
-					<li>Age</li>
-					<li><input type="text" name="age" /></li>
-				</div>
+				<!-- <div>
+					<li>Photo</li>
+					<li><input type="file" name="photo" /></li>
+				</div> -->	
 			</ul>
-			<input type="submit" class="btn" value="Register" />		
+			<input type="submit" class="btn" value="Login" />		
 <!-- 			
-<button type="button" class="btn">Register</button>
+<button type="button" class="btn">Login</button>
  -->		</form>
 		<br>
   </section>
@@ -108,7 +100,7 @@ h1 {
 		 -->
 	</div>
 <p>
-<a href="login.jsp">Register</a>
+<a href="registration.jsp">Register</a>
 </p>
 </body>
 </html>

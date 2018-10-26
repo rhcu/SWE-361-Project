@@ -4,8 +4,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>registration</display-name>
+	<display-name>login</display-name>
 	<welcome-file-list>
 		<welcome-file>registration.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<description></description>
@@ -13,8 +15,18 @@
 		<servlet-name>RegistrationController</servlet-name>
 		<servlet-class>kz.edu.nu.cs.exercise.RegistrationController</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>LoginController</display-name>
+		<servlet-name>LoginController</servlet-name>
+		<servlet-class>kz.edu.nu.cs.exercise.LoginController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegistrationController</servlet-name>
 		<url-pattern>/RegistrationController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginController</servlet-name>
+		<url-pattern>/LoginController</url-pattern>
 	</servlet-mapping>
 </web-app>
