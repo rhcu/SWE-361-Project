@@ -72,6 +72,7 @@ div.ex{
 	text-align: center;
 	width: 50%;
 	margin:0 auto;
+	opacity: 0.6;
 }
 h1 {
 	color: #26AEF2;
