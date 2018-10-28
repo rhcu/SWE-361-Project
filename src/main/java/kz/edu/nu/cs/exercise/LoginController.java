@@ -62,7 +62,9 @@ public class LoginController extends HttpServlet {
 	                db_username = rs.getString("userName");
 	                db_password = rs.getString("pass");
 	                //boolean matches = Config.matching(db_password, pass);
-	                boolean matches = db_password.equals(pass);
+	                boolean matches = db_password.equals(pass+"enc");
+	                System.out.println("Original password: " + db_password);
+	                System.out.println("This password: " + pass+"enc");
 	                //System.out.println("Passwords match: "+ matches);
 	                //check null's also 
 	                if(db_username.equals(userName) && !matches) {
@@ -92,7 +94,7 @@ public class LoginController extends HttpServlet {
 				request.setAttribute("error", ex.getMessage());
 			    out.println("<font color=red>" + ex.getMessage() + "</font>");
 				rd.include(request, response);
-		}  
+		} 
 	}
  }
 }
