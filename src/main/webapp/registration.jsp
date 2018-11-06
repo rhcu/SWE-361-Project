@@ -107,8 +107,6 @@ h1 {
 		
 		 -->
 	</div>
-<p>
-<a href="login.jsp">Register</a>
-</p>
+	
 </body>
 </html>
