@@ -22,10 +22,13 @@ public class Config {
                 "user="+user+"&password="+password+"&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	}
 	public static String md5(String pass) throws NoSuchAlgorithmException {
+		return pass + "enc";
+		/*
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(pass.getBytes());
 		byte[] digest = md.digest();
 		String myHash = new String(digest, StandardCharsets.UTF_8);
 		return myHash;
+		*/
 	}
 }

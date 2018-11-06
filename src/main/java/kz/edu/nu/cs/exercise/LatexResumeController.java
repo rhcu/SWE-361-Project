@@ -148,12 +148,29 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		e.printStackTrace();
 	}
  }
+protected void delete_file(String filename) {
+	File file = new File(filename); 
+    
+    if(file.delete()) 
+    { 
+        System.out.println("File deleted successfully"); 
+    } 
+    else
+    { 
+        System.out.println("Failed to delete the file"); 
+    } 
+}
 protected String generate(String main) throws IOException, InterruptedException {
 
 	 System.out.println("PATH: "+getServletContext().getRealPath("/") + "main.tex");
 	 String mainPath = "main.tex";
 	 String clsPath = "resume.cls";
 	 String laton =  "laton";
+	 delete_file(mainPath);
+	 delete_file(clsPath);
+	 delete_file(laton);
+	 delete_file("main.pdf");
+	 
 	 BufferedWriter writer = new BufferedWriter(new FileWriter(mainPath));
 	 writer.write(main);
 	 writer.close();
@@ -354,4 +371,3 @@ protected String clsContent = "\\ProvidesClass{resume}[2010/07/10 v0.9 Resume cl
 		"\\def\\nameskip{\\bigskip} % The space after your name at the top\n" + 
 		"\\def\\sectionskip{\\medskip} % The space after the heading section\n";
 }
-
