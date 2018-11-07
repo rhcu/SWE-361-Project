@@ -73,7 +73,7 @@ public class RegistrationController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 			rd.forward(request, response);
 			    
-		 }catch (SQLException ex) {
+		 } catch (SQLException ex) {
 			    // handle any errors
 			    System.out.println("SQLException: " + ex.getMessage());
 			    System.out.println("SQLState: " + ex.getSQLState());

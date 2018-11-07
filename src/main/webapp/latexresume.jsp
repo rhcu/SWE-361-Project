@@ -55,7 +55,6 @@ ul#nat li {
 <script src="scripts/jquery.min.js">
 </script>
 <script>
-
 experience_num = 1;
 education_num = 1;
 project_num = 1;
@@ -89,11 +88,17 @@ function addProjectField(){
 	project_num += 1;
 }
 
+/* function deleteEducationField() {
+	
+	$("#education").remove();
+} */
+
 $( document ).ready(function() {
 	addEducationField();
     addExperienceField();
     addProjectField();
-});
+/*     deleteEducationField();
+ */});
 </script>
 </head>
 <body>  
@@ -184,6 +189,8 @@ $( document ).ready(function() {
 <div id="education">
 </div>
 <input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()">
+<!-- <input class="btn btn-info"  type="button" value="Delete education" onclick="deleteEducationField()">
+ -->
 <br>
 <div id = "experience">
 </div>
