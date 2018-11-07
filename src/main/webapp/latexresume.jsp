@@ -61,22 +61,23 @@ education_num = 1;
 project_num = 1;
 function addExperienceField(){
 	var v = experience_num.toString();
-	$("#education").append("<input width='100%' class='form-control' type='text' name='title-"+v+"' placeholder='Title'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
-	$("#education").append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
-	$("#education").append("<hr>");
+	$("#experience").append("<input width='100%' class='form-control' name='title-"+v+"' placeholder='Title'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"'='dates-"+v+"' placeholder='Dates'><br>");
+	$("#experience").append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
+	$("#experience").append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
+	$("#experience").append("<hr>");
 	experience_num += 1;
 }
 function addEducationField(){
 	var v = education_num.toString();
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
-	$("#experience").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
-	$("#experience").append("<hr>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
+	$("#education").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
+	$("#education").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
+	$("#education").append("<hr>");
+
 	education_num += 1;
 }
 function addProjectField(){
@@ -88,11 +89,54 @@ function addProjectField(){
 	$("#projects").append("<hr>");
 	project_num += 1;
 }
+function getExperience(){
+	$.ajax({
+	    url: "experience",
+	    cache: false,
+	    type: "GET",
+	    dataType: 'json',
+	    success: function(response) {
+			console.log(response);
+			for(var i = 0; i < response.length;i++){
+				var obj = response[i];
+		    	console.log(obj);
+		    	if(experience_num <= response.length) addExperienceField();
+				for (var key in obj) {
+			    	console.log(key);
+				    if (obj.hasOwnProperty(key)) {
+				    	$( "input[name='"+key+"']" ).val(obj[key]);
+				    	$( "textarea[name='"+key+"']" ).val(obj[key]);
+				    }
+				}
+			}
+	    },
+	    error: function(xhr) {
+
+	    }
+	});
+}
 
 $( document ).ready(function() {
-    addExperienceField();
-    addEducationField();
-    addProjectField();
+	$("#experienceForm").submit(function(e) {
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+
+	    var form = $(this);
+	    var url = form.attr('action');//+"?"+form.serialize();
+		console.log(form.serialize());
+	    $.ajax({
+	           type: "post",
+	           url: url,
+	           data: form.serialize(), // serializes the form's elements.
+	           success: function(data)
+	           {
+	        	   getExperience();
+	           }
+	    });
+	});
+	getExperience();
+	//addExperienceField();
+    //addEducationField();
+    //addProjectField();
 });
 </script>
 </head>
@@ -160,21 +204,22 @@ $( document ).ready(function() {
 
 </ul>
  
-<form action="latexresume?username=<%= userName %>" method="post">
+<form action="experience" id="experienceForm" method="post">
 <div id="education">
 </div>
-<input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()">
+<!-- <input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()"> -->
 <br>
 <div id = "experience">
 </div>
 <input class="btn btn-info"  type="button" value="Add experience" onclick="addExperienceField()">
 <br>
+<input class="btn btn-info"  type="submit" value="Save experience">
 <div id="projects">
 </div>
 <br>
-<input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">
+<!-- <input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">  -->
 <br>
-<input class="btn btn-success" type="submit" value="Convert to PDF">
+<!-- <input class="btn btn-success" type="submit" value="Convert to PDF"> -->
 </form>
 
 <!-- <button class="btn" type="submit" value="logout">Logout</button> -->

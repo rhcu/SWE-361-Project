@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -36,6 +37,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	try {
 		
 		String username = request.getParameter("username");
+		
+		HttpSession session = request.getSession();
+		System.out.println("Username ins session: " + session.getAttribute("username"));
+		
 		User u = new User(username);
 		String main = "";
 		main += this.head;
@@ -148,12 +153,29 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		e.printStackTrace();
 	}
  }
+protected void delete_file(String filename) {
+	File file = new File(filename); 
+    
+    if(file.delete()) 
+    { 
+        System.out.println("File deleted successfully"); 
+    } 
+    else
+    { 
+        System.out.println("Failed to delete the file"); 
+    } 
+}
 protected String generate(String main) throws IOException, InterruptedException {
 
 	 System.out.println("PATH: "+getServletContext().getRealPath("/") + "main.tex");
 	 String mainPath = "main.tex";
 	 String clsPath = "resume.cls";
 	 String laton =  "laton";
+	 delete_file(mainPath);
+	 delete_file(clsPath);
+	 delete_file(laton);
+	 delete_file("main.pdf");
+	 
 	 BufferedWriter writer = new BufferedWriter(new FileWriter(mainPath));
 	 writer.write(main);
 	 writer.close();
@@ -212,7 +234,15 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     	 System.out.println(ex.getMessage());
      }
 	try {
-		String username = request.getParameter("username");
+		HttpSession session = request.getSession();
+		System.out.println("Username in session: " + session.getAttribute("username"));
+		String username = (String) session.getAttribute("username");
+		
+		if(username == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		}
+		
 		User u = new User(username);
 		
 	   request.setAttribute("userName", username);
@@ -354,4 +384,3 @@ protected String clsContent = "\\ProvidesClass{resume}[2010/07/10 v0.9 Resume cl
 		"\\def\\nameskip{\\bigskip} % The space after your name at the top\n" + 
 		"\\def\\sectionskip{\\medskip} % The space after the heading section\n";
 }
-

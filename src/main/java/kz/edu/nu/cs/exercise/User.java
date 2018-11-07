@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class User {
 	private ResultSet rs;
@@ -53,5 +55,11 @@ public class User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public String auth(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String username = null;
+		username = (String) session.getAttribute("username");
+		return username;
 	}
 }
