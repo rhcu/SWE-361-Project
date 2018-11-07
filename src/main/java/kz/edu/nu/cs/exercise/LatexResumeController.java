@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -36,6 +37,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	try {
 		
 		String username = request.getParameter("username");
+		
+		HttpSession session = request.getSession();
+		System.out.println("Username ins session: " + session.getAttribute("username"));
+		
 		User u = new User(username);
 		String main = "";
 		main += this.head;
@@ -229,7 +234,15 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     	 System.out.println(ex.getMessage());
      }
 	try {
-		String username = request.getParameter("username");
+		HttpSession session = request.getSession();
+		System.out.println("Username in session: " + session.getAttribute("username"));
+		String username = (String) session.getAttribute("username");
+		
+		if(username == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		}
+		
 		User u = new User(username);
 		
 	   request.setAttribute("userName", username);

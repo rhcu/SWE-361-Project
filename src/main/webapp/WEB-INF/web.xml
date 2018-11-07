@@ -6,6 +6,7 @@
 	<display-name>registration</display-name>
 	<display-name>login</display-name>
 	<welcome-file-list>
+		<welcome-file>RegistrationController</welcome-file>
 		<welcome-file>registration.jsp</welcome-file>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>

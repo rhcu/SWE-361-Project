@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class UserDataServlet
@@ -32,7 +33,13 @@ public class LoginController extends HttpServlet {
     	 System.out.println("AAAAA");
     	 System.out.println(ex.getMessage());
      }
-	 
+	 LogModel log = null;
+	 try {
+		 log = new LogModel();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	 Connection conn = null;
 	 PrintWriter out = response.getWriter();
 	 String userName = request.getParameter("username");
@@ -52,6 +59,7 @@ public class LoginController extends HttpServlet {
 	        Statement stmt = conn.createStatement();
 	        Statement statement = conn.createStatement();
 	        String db_username = null;
+	        boolean found = false;
 	        String db_password = null;
 	            String query = "SELECT userName, pass FROM student;";
 	            stmt.executeQuery(query);
@@ -73,23 +81,25 @@ public class LoginController extends HttpServlet {
 	            	   	out.println("<font color=red>Password is incorrect!</font>");
 	            		rd.include(request, response);
 	                }else if(db_username.equals(userName) && matches){
-	                   System.out.println("sucess");
-	                   
-	       			System.out.println(request.getParameter("username"));
-	       			System.out.println("successfuly found");
-	       			User student = new User(request.getParameter("username"));
-	       			conn.close();
-	       			RequestDispatcher rd = request.getRequestDispatcher("home.jsp?firstname=" + student.getName() + "&lastname=" + student.getLastname() + "&address=" + student.getAddr() + "&age=" + student.getAge());
-	       			rd.forward(request, response);
+	                    found = true;
+		       			log.add("login", request.getParameter("username") + " successfuly entered");
+		       			User student = new User(request.getParameter("username"));
+		       			HttpSession session = request.getSession();
+		       			session.setAttribute("username", request.getParameter("username"));
+		       			RequestDispatcher rd = request.getRequestDispatcher("home.jsp?firstname=" + student.getName() + "&lastname=" + student.getLastname() + "&address=" + student.getAddr() + "&age=" + student.getAge());
+		       			rd.forward(request, response);
 	                }
-
 	            }
+	            if(!found) {
+	       			log.add("login", request.getParameter("username") + " failed to enter");
+	            }
+	            rs.close();
+       			conn.close();
 
-		 }catch (SQLException ex) {
+		 }catch (Exception ex) {
 			    // handle any errors
-			    System.out.println("SQLException: " + ex.getMessage());
-			    System.out.println("SQLState: " + ex.getSQLState());
-			    System.out.println("VendorError: " + ex.getErrorCode());
+			 	ex.printStackTrace();
+			    
 			    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 				request.setAttribute("error", ex.getMessage());
 			    out.println("<font color=red>" + ex.getMessage() + "</font>");

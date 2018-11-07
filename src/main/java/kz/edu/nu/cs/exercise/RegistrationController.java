@@ -16,13 +16,36 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 
 /**
  * Servlet implementation class UserDataServlet
  */
 public class RegistrationController extends HttpServlet {
-
+ protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 HttpSession session = request.getSession();
+	 String username = (String)session.getAttribute("username");
+	 if(username == null) {
+		 System.out.println("Unauthorized user");
+		 RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
+		 rd.include(request, response);
+	 }else {
+		 System.out.println("Authorized user: " + username);
+		 User u = new User(username);
+		 try {
+			 request.setAttribute("firstname", u.getName());
+			 request.setAttribute("lastname", u.getLastname());
+			 request.setAttribute("username", username);
+			 request.setAttribute("address", u.getAddr());
+			 request.setAttribute("age", u.getAge());
+		 } catch (SQLException e) {
+			 e.printStackTrace();
+		 }
+		 RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+		 rd.include(request, response);
+	 }
+ }
  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   
 	 try {
