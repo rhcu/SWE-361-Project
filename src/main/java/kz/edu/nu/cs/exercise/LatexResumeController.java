@@ -50,7 +50,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				"\\address{"+u.getAddr()+"}\n" + 
 				"\n" + 
 				"\\begin{document}";
-		
 		main += "\\begin{rSection}{Experience}";
 		
 		for(int i = 1; i < 100; i++) {
@@ -64,8 +63,10 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			 values.add(num);
 			 ResultSet rs = expModel.findWhere(fields, values);
 			 
-			 if(rs == null)
-				 break;
+			 if(rs == null) {
+				 expModel.disconnect();
+				 continue;
+			 }
 			 
 			 String title = rs.getString("title");
 			 String company = rs.getString("company");
