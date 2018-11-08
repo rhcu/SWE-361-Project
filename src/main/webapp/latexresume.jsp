@@ -59,16 +59,21 @@ ul#nat li {
 experience_num = 1;
 education_num = 1;
 project_num = 1;
-function addExperienceField(){
-	var v = experience_num.toString();
-	$("#experience").append("<input width='100%' class='form-control' name='title-"+v+"' placeholder='Title'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='dates-"+v+"'='dates-"+v+"' placeholder='Dates'><br>");
-	$("#experience").append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
-	$("#experience").append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
-	$("#experience").append("<hr>");
-	experience_num += 1;
+function addExperienceField(v){
+	if(!v){
+		v = experience_num + 1;
+	}
+	$("#experience").append("<div id='experienceField-"+v+"'></div>");
+	currentField = "#experienceField-"+v;
+	$(currentField).append("<input width='100%' class='form-control' name='title-"+v+"' placeholder='Title'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='dates-"+v+"'='dates-"+v+"' placeholder='Dates'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
+	$(currentField).append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
+	$(currentField).append("<input type='button' id='deleteExperience' data-num='"+v+"' value='Delete'>");
+	$(currentField).append("<hr>");
 }
+
 function addEducationField(){
 	var v = education_num.toString();
 	$("#education").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
@@ -89,26 +94,35 @@ function addProjectField(){
 	$("#projects").append("<hr>");
 	project_num += 1;
 }
+function getNum(obj){
+	for(var key in obj){
+		arr = key.split("-")
+		return arr[arr.length - 1];
+	}
+}
 function getExperience(){
 	$.ajax({
 	    url: "experience",
 	    cache: false,
 	    type: "GET",
 	    dataType: 'json',
-	    success: function(response) {
-			console.log(response);
+	    success: function(response) {;
+			var max_experience = 0;
 			for(var i = 0; i < response.length;i++){
 				var obj = response[i];
 		    	console.log(obj);
-		    	if(experience_num <= response.length) addExperienceField();
+		    	var num = getNum(obj);
+		    	max_experience = Math.max(max_experience, parseInt(num, 10));
+		    	addExperienceField(num)
 				for (var key in obj) {
-			    	console.log(key);
-				    if (obj.hasOwnProperty(key)) {
+			    	if (obj.hasOwnProperty(key)) {
 				    	$( "input[name='"+key+"']" ).val(obj[key]);
 				    	$( "textarea[name='"+key+"']" ).val(obj[key]);
 				    }
 				}
 			}
+			experience_num = max_experience + 1;
+			addExperienceField((max_experience + 1).toString());
 	    },
 	    error: function(xhr) {
 
@@ -116,19 +130,25 @@ function getExperience(){
 	});
 }
 
-$( document ).ready(function() {
-	$("#experienceForm").submit(function(e) {
-		e.preventDefault(); // avoid to execute the actual submit of the form.
 
+
+$( document ).ready(function() {
+	
+	$("#experienceForm").submit(function(e) {
+		e.preventDefault();
 	    var form = $(this);
-	    var url = form.attr('action');//+"?"+form.serialize();
+	    var url = form.attr('action');
+
 		console.log(form.serialize());
 	    $.ajax({
 	           type: "post",
 	           url: url,
-	           data: form.serialize(), // serializes the form's elements.
+
+	           data: form.serialize(),
 	           success: function(data)
 	           {
+	        	   $("#experience").empty();
+
 	        	   getExperience();
 	           }
 	    });
@@ -137,7 +157,28 @@ $( document ).ready(function() {
 	//addExperienceField();
     //addEducationField();
     //addProjectField();
+    
+    
+	$("#experience").on("click","#deleteExperience", function(e){
+		num = $(this).attr("data-num");
+		deleteButton = $(this);
+		$.ajax({
+	        type: "post",
+	        url: "experience",
+	        data: {
+	        	"method": "delete",
+	        	"num": num
+	        }, // serializes the form's elements.
+	        success: function(data)
+	        {
+	        	$("#experienceField-"+num).remove();
+	        }
+	   });
+	});
 });
+
+
+
 </script>
 </head>
 <body>  
@@ -219,9 +260,10 @@ $( document ).ready(function() {
 <br>
 <!-- <input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">  -->
 <br>
-<!-- <input class="btn btn-success" type="submit" value="Convert to PDF"> -->
 </form>
-
+<form action="latexresume" method="post">
+<input class="btn btn-success" type="submit" value="Convert to PDF">
+</form>
 <!-- <button class="btn" type="submit" value="logout">Logout</button> -->
 
 </div>

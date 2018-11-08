@@ -42,26 +42,55 @@ public class ExperienceController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username != null) {
-			try {
-				for(int i = 1; i < 100; i++) {
-					 String num = Integer.toString(i);
-					 String title = request.getParameter("title-" + num);
-					 
-					 String company = request.getParameter("company-" + num);
-					 String dates = request.getParameter("dates-" + num);
-					 String description = request.getParameter("description-" + num);
-					 String location = request.getParameter("location-" + num);
-					 if(title!=null && company!=null && dates!=null 
-							 && description!=null && location!=null) {
-						 ExperienceModel model = new ExperienceModel(username);
-						 model.addOrUpdate(num, title, company, dates, location, description);
+			String method = request.getParameter("method");
+			if(method == null || method.equals("post")) {
+				ExperienceModel model = null;
+				try {
+					for(int i = 1; i < 100; i++) {
+						 String num = Integer.toString(i);
+						 String title = request.getParameter("title-" + num);
+						 
+						 String company = request.getParameter("company-" + num);
+						 String dates = request.getParameter("dates-" + num);
+						 String description = request.getParameter("description-" + num);
+						 String location = request.getParameter("location-" + num);
+						 
+						 if(title!=null && company!=null && dates!=null 
+								 && description!=null && location!=null &&
+								 title.length() > 0 && company.length() > 0 && dates.length() > 0 
+								 && description.length() > 0 && location.length() > 0) {
+							 model = new ExperienceModel(username);
+							 model.addOrUpdate(num, title, company, dates, location, description);
+						 }
 					 }
-				 }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					try {
+						model.disconnect();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}else if(method.equals("delete")){
+				String num = request.getParameter("num");
+				ExperienceModel model = null;
+				if(num != null) {
+					try {
+						model = new ExperienceModel(username);
+						model.deleteNum(num);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}finally {
+						try {
+							model.disconnect();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
-			
 		}
 	}
 	@Override
@@ -71,10 +100,8 @@ public class ExperienceController extends HttpServlet {
 		String username = (String) session.getAttribute("username");
 		JSONArray arr = new JSONArray();
 		if(username != null) {
-			for(int i = 1; i < 100; i++) {
-				 JSONObject obj = new JSONObject();
 				 
-				 String num = Integer.toString(i);
+				 //String num = Integer.toString(i);
 				 ExperienceModel model = null;
 				 try {
 					model = new ExperienceModel(username);
@@ -84,28 +111,38 @@ public class ExperienceController extends HttpServlet {
 				}
 				 List<String> fields = new ArrayList<String>();
 				 fields.add("username");
-				 fields.add("num");
+				 //fields.add("num");
 				 List<String> values = new ArrayList<String>();
 				 values.add(username);
-				 values.add(num);
+				 //values.add(num);
 				 try {
 					ResultSet rs = model.findWhere(fields, values);
-					if(rs!= null) {
-						obj.put("title-"+num, rs.getString("title"));
-						obj.put("company-"+num, rs.getString("company"));
-						obj.put("dates-"+num, rs.getString("dates"));
-						obj.put("description-"+num, rs.getString("description"));
-						obj.put("location-"+num, rs.getString("location"));
-						
-						arr.add(obj);
-					}else {
-						break;
-					}
+					//if(rs!= null) {
+						while(rs != null) {
+
+							JSONObject obj = new JSONObject();
+							String num = rs.getString("num");
+							obj.put("title-"+num, rs.getString("title"));
+							obj.put("company-"+num, rs.getString("company"));
+							obj.put("dates-"+num, rs.getString("dates"));
+							obj.put("description-"+num, rs.getString("description"));
+							obj.put("location-"+num, rs.getString("location"));
+							
+							arr.add(obj);
+							rs.next();
+						}
+					//}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} finally {
+					try {
+						model.disconnect();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
 		}
 		String result = arr.toJSONString();
 		ServletOutputStream out = response.getOutputStream();
