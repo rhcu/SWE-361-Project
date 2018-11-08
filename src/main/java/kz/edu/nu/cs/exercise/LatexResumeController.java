@@ -52,49 +52,33 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				"\\begin{document}";
 		main += "\\begin{rSection}{Experience}";
 		
-		for(int i = 1; i < 100; i++) {
-			 String num = Integer.toString(i);
 			 ExperienceModel expModel = new ExperienceModel(username);
 			 List<String> fields = new ArrayList<String>();
 			 fields.add("username");
-			 fields.add("num");
 			 List<String> values = new ArrayList<String>();
 			 values.add(username);
-			 values.add(num);
 			 ResultSet rs = expModel.findWhere(fields, values);
-			 
-			 if(rs == null) {
-				 expModel.disconnect();
-				 continue;
+			 while(rs != null) {
+				 if(rs == null) {
+					 expModel.disconnect();
+					 break;
+				 }
+				 if(rs.isAfterLast()) break;
+				 String num = rs.getString("num");
+				 
+				 String title = rs.getString("title");
+				 String company = rs.getString("company");
+				 String dates = rs.getString("dates");
+				 String description = rs.getString("description");
+				 String location = rs.getString("location");
+				 if(title != null && company != null && dates!= null && description!= null) {
+					 main += "\\begin{rSubsection}{"+company+"}{"+dates+"}{ "+title+"}{"+location+"}\n" + 
+					 		"\\item "+description+"\n" + 
+					 		"\\end{rSubsection}\n";
+				 }
+				 rs.next();
 			 }
 			 
-			 String title = rs.getString("title");
-			 String company = rs.getString("company");
-			 String dates = rs.getString("dates");
-			 String description = rs.getString("description");
-			 String location = rs.getString("location");
-			 if(title != null && company != null && dates!= null && description!= null) {
-				 main += "\\begin{rSubsection}{"+company+"}{"+dates+"}{ "+title+"}{"+location+"}\n" + 
-				 		"\\item "+description+"\n" + 
-				 		"\\end{rSubsection}\n";
-			 }
-			 /*
-			 String school = request.getParameter("school-" + num);
-			 String degree = request.getParameter("degree-" + num);
-			 String dates = request.getParameter("ed-dates-" + num);
-			 String description = request.getParameter("ed-description-" + num);
-			 String major = request.getParameter("major-" + num);
-			 
-			 if(school != null && degree != null && dates!= null && major != null) {
-				 if(description == null) description = "";
-				 main += "{\\bf "+school+"} \\hfill {\\em "+dates+"} \\\\ \n" + 
-				 		""+degree+" in "+major+".\\\\\n" + 
-				 		description;
-			 }else {
-				 break;
-			 }*/
-		}
-		
 		main += "\\end{rSection}\n";
 		/*
 		main += "\\begin{rSection}{Education}";
