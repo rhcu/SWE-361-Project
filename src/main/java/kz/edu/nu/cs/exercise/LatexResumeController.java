@@ -42,7 +42,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		HttpSession session = request.getSession();
 		System.out.println("Username ins session: " + session.getAttribute("username"));
 		username = (String)session.getAttribute("username");
-		
 		User u = new User(username);
 		String main = "";
 		main += this.head;

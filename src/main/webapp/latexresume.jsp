@@ -138,14 +138,17 @@ $( document ).ready(function() {
 		e.preventDefault();
 	    var form = $(this);
 	    var url = form.attr('action');
+
 		console.log(form.serialize());
 	    $.ajax({
 	           type: "post",
 	           url: url,
+
 	           data: form.serialize(),
 	           success: function(data)
 	           {
 	        	   $("#experience").empty();
+
 	        	   getExperience();
 	           }
 	    });
@@ -257,7 +260,6 @@ $( document ).ready(function() {
 <br>
 <!-- <input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">  -->
 <br>
-<!--  -->
 </form>
 <form action="latexresume" method="post">
 <input class="btn btn-success" type="submit" value="Convert to PDF">
