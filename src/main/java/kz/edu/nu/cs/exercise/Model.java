@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -38,6 +39,24 @@ public class Model {
         if(!rs.next())
         	return null;
         return rs;
+	}
+	public void deleteWhere(List<String> whereFields, List<String> whereValues) throws SQLException {
+		String where_clause = "";
+		for(int i = 0; i < whereFields.size(); i++) {
+			if(i > 0)
+				where_clause += " and ";
+			where_clause += whereFields.get(i)+"='"+whereValues.get(i)+"'";
+		}
+		String query = "DELETE FROM "+this.tablename+" WHERE " + where_clause;
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
+	}
+	public void deleteNum(String num) throws SQLException {
+		List<String> fields = new ArrayList<String>();
+		fields.add("num");
+		List<String> values = new ArrayList<String>();
+		values.add(num);
+		deleteWhere(fields,values);
 	}
 	public void update(List<String> fields, List<String> values,
 			List<String> whereFields, List<String> whereValues) throws SQLException {

@@ -42,26 +42,41 @@ public class ExperienceController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username != null) {
-			try {
-				for(int i = 1; i < 100; i++) {
-					 String num = Integer.toString(i);
-					 String title = request.getParameter("title-" + num);
-					 
-					 String company = request.getParameter("company-" + num);
-					 String dates = request.getParameter("dates-" + num);
-					 String description = request.getParameter("description-" + num);
-					 String location = request.getParameter("location-" + num);
-					 if(title!=null && company!=null && dates!=null 
-							 && description!=null && location!=null) {
-						 ExperienceModel model = new ExperienceModel(username);
-						 model.addOrUpdate(num, title, company, dates, location, description);
+			String method = request.getParameter("method");
+			if(method == null || method.equals("post")) {
+				try {
+					for(int i = 1; i < 100; i++) {
+						 String num = Integer.toString(i);
+						 String title = request.getParameter("title-" + num);
+						 
+						 String company = request.getParameter("company-" + num);
+						 String dates = request.getParameter("dates-" + num);
+						 String description = request.getParameter("description-" + num);
+						 String location = request.getParameter("location-" + num);
+						 
+						 if(title!=null && company!=null && dates!=null 
+								 && description!=null && location!=null &&
+								 title.length() > 0 && company.length() > 0 && dates.length() > 0 
+								 && description.length() > 0 && location.length() > 0) {
+							 ExperienceModel model = new ExperienceModel(username);
+							 model.addOrUpdate(num, title, company, dates, location, description);
+						 }
 					 }
-				 }
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(method.equals("delete")){
+				String num = request.getParameter("num");
+				if(num != null) {
+					ExperienceModel model;
+					try {
+						model = new ExperienceModel(username);
+						model.deleteNum(num);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
 		}
 	}
 	@Override
@@ -98,8 +113,6 @@ public class ExperienceController extends HttpServlet {
 						obj.put("location-"+num, rs.getString("location"));
 						
 						arr.add(obj);
-					}else {
-						break;
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
