@@ -39,6 +39,12 @@ public class ExperienceController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		 LogModel log = null;
+	     try {
+	      log = new LogModel();
+	     } catch (SQLException e) {
+	      e.printStackTrace();
+	     }    
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username != null) {
@@ -62,9 +68,15 @@ public class ExperienceController extends HttpServlet {
 							 model = new ExperienceModel(username);
 							 model.addOrUpdate(num, title, company, dates, location, description);
 						 }
-					 }
+          }
+				  log.add("Experience",  "Experience successfully generated");
 				} catch (Exception e) {
-					e.printStackTrace();
+              try {
+						    log.add("Experience",  "Experience failed to generate");
+						  } catch (Exception LogExc) {
+							  e.printStackTrace();
+						  }
+						  e.printStackTrace();
 				}finally {
 					try {
 						model.disconnect();

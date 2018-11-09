@@ -37,8 +37,18 @@ public class LatexResumeController extends HttpServlet {
 
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
-		String username = null;
-		
+
+		  LogModel log = null;
+		   try {
+		    log = new LogModel();
+		   } catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		   }
+
+		String username = request.getParameter("username");
+
+
 		HttpSession session = request.getSession();
 		System.out.println("Username ins session: " + session.getAttribute("username"));
 		username = (String)session.getAttribute("username");
@@ -147,6 +157,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                 os.write(byteRead);
             }
             os.flush();
+            log.add("LatexResume",  "Resume successfully generated");
+
         }
         catch (Exception excp)
         {
@@ -157,6 +169,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             os.close();
             fis.close();
         }
+        
 	
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -168,13 +181,33 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
  }
 protected void delete_file(String filename) {
 	File file = new File(filename); 
-    
+	LogModel log = null;
+	   try {
+	    log = new LogModel();
+	   } catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	   }
     if(file.delete()) 
     { 
+    	 try {
+    	      log.add("LatexResume",  "LatexResume file deleted successfully");
+    	    } catch (Exception e) {
+    	      // TODO Auto-generated catch block
+    	      e.printStackTrace();
+    	    }
+
         System.out.println("File deleted successfully"); 
     } 
     else
     { 
+    	 try {
+    	      log.add("LatexResume",  "Failed to delete LatexResume file");
+    	    } catch (Exception e) {
+    	      // TODO Auto-generated catch block
+    	      e.printStackTrace();
+    	    }
+
         System.out.println("Failed to delete the file"); 
     } 
 }

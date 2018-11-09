@@ -61,6 +61,10 @@ public class LoginController extends HttpServlet {
 	        String db_username = null;
 	        boolean found = false;
 	        String db_password = null;
+	        
+//            boolean matches = db_password.equals(pass+"enc");
+//            System.out.println("Original password: " + db_password);
+           
 	            String query = "SELECT userName, pass FROM student;";
 	            stmt.executeQuery(query);
 	            ResultSet rs = stmt.getResultSet();
@@ -69,25 +73,31 @@ public class LoginController extends HttpServlet {
 	            	
 	                db_username = rs.getString("userName");
 	                db_password = rs.getString("pass");
-	                //boolean matches = Config.matching(db_password, pass);
-	                boolean matches = db_password.equals(pass+"enc");
-	                System.out.println("Original password: " + db_password);
-	                System.out.println("This password: " + pass+"enc");
-	                //System.out.println("Passwords match: "+ matches);
-	                //check null's also 
-	                if(db_username.equals(userName) && !matches) {
-	                	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-	            	   	request.setAttribute("error", "Password is incorrect!");
-	            	   	out.println("<font color=red>Password is incorrect!</font>");
-	            		rd.include(request, response);
-	                }else if(db_username.equals(userName) && matches){
+	                String newPass = Config.encrypt(pass);
+	                boolean matches = db_password.equals(newPass);
+	                if((userName.equals("admin")) && pass.equals("admin")) {
 	                    found = true;
-		       			log.add("login", request.getParameter("username") + " successfuly entered");
-		       			User student = new User(request.getParameter("username"));
-		       			HttpSession session = request.getSession();
-		       			session.setAttribute("username", request.getParameter("username"));
-		       			RequestDispatcher rd = request.getRequestDispatcher("home.jsp?firstname=" + student.getName() + "&lastname=" + student.getLastname() + "&address=" + student.getAddr() + "&age=" + student.getAge());
-		       			rd.forward(request, response);
+	                    log.add("login", request.getParameter("username") + " successfuly entered");	                 
+	                    HttpSession session = request.getSession();
+	                    session.setAttribute("username", request.getParameter("username"));
+	                    RequestDispatcher rd = request.getRequestDispatcher("admin_panel.jsp");
+	                    rd.forward(request, response);
+	                }else {
+
+	                	if(db_username.equals(userName) && !matches) {
+	                		RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+	                		request.setAttribute("error", "Password is incorrect!");
+	                		out.println("<font color=red>Password is incorrect!</font>");
+	                		rd.include(request, response);
+	                	}else if(db_username.equals(userName) && matches){
+	                		found = true;
+	                		log.add("login", request.getParameter("username") + " successfuly entered");
+	                		User student = new User(request.getParameter("username"));
+	                		HttpSession session = request.getSession();
+	                		session.setAttribute("username", request.getParameter("username"));
+	                		RequestDispatcher rd = request.getRequestDispatcher("home.jsp?firstname=" + student.getName() + "&lastname=" + student.getLastname() + "&address=" + student.getAddr() + "&age=" + student.getAge());
+	                		rd.forward(request, response);
+	                	}
 	                }
 	            }
 	            if(!found) {

@@ -78,7 +78,7 @@ h1 {
 					<li>Username</li>
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
-					<li><input type="text" name="password" /></li>
+					<li><input type="password" name="password" /></li>
 				</div>
 				<!-- <div>
 					<li>Photo</li>

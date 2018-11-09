@@ -5,10 +5,12 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>registration</display-name>
 	<display-name>login</display-name>
+	
 	<welcome-file-list>
 		<welcome-file>RegistrationController</welcome-file>
 		<welcome-file>registration.jsp</welcome-file>
 		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>admin_panel.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<description></description>
@@ -22,6 +24,12 @@
 		<servlet-name>LoginController</servlet-name>
 		<servlet-class>kz.edu.nu.cs.exercise.LoginController</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>AdminController</display-name>
+		<servlet-name>AdminController</servlet-name>
+		<servlet-class>kz.edu.nu.cs.exercise.AdminController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>RegistrationController</servlet-name>
 		<url-pattern>/RegistrationController</url-pattern>
@@ -29,5 +37,9 @@
 	<servlet-mapping>
 		<servlet-name>LoginController</servlet-name>
 		<url-pattern>/LoginController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminController</servlet-name>
+		<url-pattern>/AdminController</url-pattern>
 	</servlet-mapping>
 </web-app>
