@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,6 +37,7 @@ public class LatexResumeController extends HttpServlet {
 
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try {
+
 		  LogModel log = null;
 		   try {
 		    log = new LogModel();
@@ -44,10 +47,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		   }
 
 		String username = request.getParameter("username");
-		
+
+
 		HttpSession session = request.getSession();
 		System.out.println("Username ins session: " + session.getAttribute("username"));
-		
+		username = (String)session.getAttribute("username");
 		User u = new User(username);
 		String main = "";
 		main += this.head;
@@ -56,7 +60,37 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				"\\address{"+u.getAddr()+"}\n" + 
 				"\n" + 
 				"\\begin{document}";
+		main += "\\begin{rSection}{Experience}";
 		
+			 ExperienceModel expModel = new ExperienceModel(username);
+			 List<String> fields = new ArrayList<String>();
+			 fields.add("username");
+			 List<String> values = new ArrayList<String>();
+			 values.add(username);
+			 ResultSet rs = expModel.findWhere(fields, values);
+			 while(rs != null) {
+				 if(rs == null) {
+					 expModel.disconnect();
+					 break;
+				 }
+				 if(rs.isAfterLast()) break;
+				 String num = rs.getString("num");
+				 
+				 String title = rs.getString("title");
+				 String company = rs.getString("company");
+				 String dates = rs.getString("dates");
+				 String description = rs.getString("description");
+				 String location = rs.getString("location");
+				 if(title != null && company != null && dates!= null && description!= null) {
+					 main += "\\begin{rSubsection}{"+company+"}{"+dates+"}{ "+title+"}{"+location+"}\n" + 
+					 		"\\item "+description+"\n" + 
+					 		"\\end{rSubsection}\n";
+				 }
+				 rs.next();
+			 }
+			 
+		main += "\\end{rSection}\n";
+		/*
 		main += "\\begin{rSection}{Education}";
 		
 		for(int i = 1; i < 100; i++) {
@@ -66,31 +100,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			 String dates = request.getParameter("ed-dates-" + num);
 			 String description = request.getParameter("ed-description-" + num);
 			 String major = request.getParameter("major-" + num);
+			 
 			 if(school != null && degree != null && dates!= null && major != null) {
 				 if(description == null) description = "";
 				 main += "{\\bf "+school+"} \\hfill {\\em "+dates+"} \\\\ \n" + 
 				 		""+degree+" in "+major+".\\\\\n" + 
 				 		description;
-			 }else {
-				 break;
-			 }
-		}
-		
-		main += "\\end{rSection}\n";
-		
-		main += "\\begin{rSection}{Experience}";
-		
-		for(int i = 1; i < 100; i++) {
-			 String num = Integer.toString(i);
-			 String title = request.getParameter("title-" + num);
-			 String company = request.getParameter("company-" + num);
-			 String dates = request.getParameter("dates-" + num);
-			 String description = request.getParameter("description-" + num);
-			 String location = request.getParameter("location-" + num);
-			 if(title != null && company != null && dates!= null && description!= null) {
-				 main += "\\begin{rSubsection}{"+company+"}{"+dates+"}{ "+title+"}{"+location+"}\n" + 
-				 		"\\item "+description+"\n" + 
-				 		"\\end{rSubsection}\n";
 			 }else {
 				 break;
 			 }
@@ -118,6 +133,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		}
 		
 		main += "\\end{rSection}\n";
+		*/
 		
 		main += this.foot;
 		

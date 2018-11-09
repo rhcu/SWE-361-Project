@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
@@ -21,7 +22,20 @@ public class Model {
 		this.tablename = tablename;
 		this.conn = DriverManager.getConnection(Config.getUrlMySQL());
 	}
+	public void reconnect() throws SQLException {
+		try {
+	         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+	     } catch (Exception ex) {
+	         // handle the errorr
+	    	 System.out.println(ex.getMessage());
+	     }
+		this.conn = DriverManager.getConnection(Config.getUrlMySQL());
+	}
+	public void disconnect() throws SQLException{
+		this.conn.close();
+	}
 	public ResultSet findWhere(List<String> fields, List<String> values) throws SQLException {
+		reconnect();
 		Statement stmt = this.conn.createStatement();
         String db_username = null;
         String db_password = null;
@@ -35,12 +49,34 @@ public class Model {
         String query = "SELECT * FROM "+this.tablename+" WHERE "+where_clause;
         System.out.println("Find where query: " + query);
         ResultSet rs = stmt.executeQuery(query);
+        
         if(!rs.next())
         	return null;
         return rs;
 	}
+	public void deleteWhere(List<String> whereFields, List<String> whereValues) throws SQLException {
+		reconnect();
+		String where_clause = "";
+		for(int i = 0; i < whereFields.size(); i++) {
+			if(i > 0)
+				where_clause += " and ";
+			where_clause += whereFields.get(i)+"='"+whereValues.get(i)+"'";
+		}
+		String query = "DELETE FROM "+this.tablename+" WHERE " + where_clause;
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.executeUpdate();
+		disconnect();
+	}
+	public void deleteNum(String num) throws SQLException {
+		List<String> fields = new ArrayList<String>();
+		fields.add("num");
+		List<String> values = new ArrayList<String>();
+		values.add(num);
+		deleteWhere(fields,values);
+	}
 	public void update(List<String> fields, List<String> values,
 			List<String> whereFields, List<String> whereValues) throws SQLException {
+		reconnect();
 		String where_clause = "";
 		for(int i = 0; i < whereFields.size(); i++) {
 			if(i > 0)
@@ -62,6 +98,7 @@ public class Model {
 		conn.close();
 	}
 	public void insert(List<String> fields, List<String> values) throws Exception {
+		reconnect();
 		if(fields.size() != values.size()) 
 			throw new Exception("Fields and values arrays should be equal in size");
 		String fields_str = "";
@@ -85,7 +122,6 @@ public class Model {
 		}
 		ps.executeUpdate(); // execute it on test database
 		System.out.println("successfuly inserted");
-		ps.close();
-		conn.close();
+		disconnect();
 	}
 }

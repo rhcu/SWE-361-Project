@@ -50,7 +50,7 @@ public class User {
 			
 			ResultSet resultSet = ps.executeQuery(query);
 			resultSet.next();
-			this.rs = resultSet;			
+			this.rs = resultSet;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
