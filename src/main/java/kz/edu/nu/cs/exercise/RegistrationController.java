@@ -102,7 +102,7 @@ public class RegistrationController extends HttpServlet {
 		      System.out.println("successfuly inserted");
 		      ps.close();
 		      conn.close();
-		      RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+		      RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 		      rd.forward(request, response);
 		     } catch (Exception ex) {//SQLException
 		          // handle any errors

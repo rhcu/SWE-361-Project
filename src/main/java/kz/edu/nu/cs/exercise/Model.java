@@ -74,6 +74,13 @@ public class Model {
 		values.add(num);
 		deleteWhere(fields,values);
 	}
+	public void deleteUsername(String username) throws SQLException {
+		List<String> fields = new ArrayList<String>();
+		fields.add("username");
+		List<String> values = new ArrayList<String>();
+		values.add(username);
+		deleteWhere(fields,values);
+	}
 	public void update(List<String> fields, List<String> values,
 			List<String> whereFields, List<String> whereValues) throws SQLException {
 		reconnect();

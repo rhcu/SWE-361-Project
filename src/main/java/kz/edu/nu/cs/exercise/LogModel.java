@@ -12,7 +12,6 @@ public class LogModel extends Model{
 		super("cvbuilder_logs");
 	}
 	public void add(String type, String content) throws Exception {
-		
 		List<String> fields = new ArrayList<String>();
 		fields.add("type");
 		fields.add("content");

@@ -75,12 +75,12 @@ public class LoginController extends HttpServlet {
 	                db_password = rs.getString("pass");
 	                String newPass = Config.encrypt(pass);
 	                boolean matches = db_password.equals(newPass);
-	                if((userName.equals("admin")) && pass.equals("admin")) {
+	                if((userName.equals("admin")) && matches) {
 	                    found = true;
 	                    log.add("login", request.getParameter("username") + " successfuly entered");	                 
 	                    HttpSession session = request.getSession();
 	                    session.setAttribute("username", request.getParameter("username"));
-	                    RequestDispatcher rd = request.getRequestDispatcher("admin_panel.jsp");
+	                    RequestDispatcher rd = request.getRequestDispatcher("admin_panel");
 	                    rd.forward(request, response);
 	                }else {
 
