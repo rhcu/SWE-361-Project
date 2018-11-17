@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.json.Json;
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -36,18 +38,61 @@ public class AdminController extends HttpServlet {
 	
   
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String res = "<!DOCTYPE html><html><head><title> Menu </title> </head> <body>"
- 				+ "<h1> Logs </h1><p><ul>"; 
- 				
-    
- 		for(String v : values) {
- 			System.out.println("Value is: " + v);
- 			
- 			res += "<li>" + v +  "</li>";
- 		}
- 		res+= "</ul></p></body></html>";
- 	  response.setContentType("text/html");
- 	 response.getWriter().println(res);
+		 HttpSession session = request.getSession();
+		 String username = (String)session.getAttribute("username");
+		 List<String> fields1 = new ArrayList<String>();
+		 List<String> values1 = new ArrayList<String>();
+		 if(username.equals("admin")) {
+			 String res = "<!DOCTYPE html><html><head><title> Menu </title> </head> <body>"
+	 				+ "<h1> Logs </h1><p><ul>"; 
+			 try {
+		         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+		     } catch (Exception ex) {
+		         // handle the errorr
+		    	
+		    	 System.out.println(ex.getMessage());
+		     }
+			 Connection conn = null;
+			 try {
+				 conn = DriverManager.getConnection(Config.getUrlMySQL());
+	
+				 System.out.println("Database..");
+				 Statement stmt = conn.createStatement();
+				        
+				 String db_type = null;
+				
+				 String db_value = null;
+		
+			           
+				 String query = "SELECT type, content FROM cvbuilder_logs;";
+				 stmt.executeQuery(query);
+				 ResultSet rs = stmt.getResultSet();
+				            
+				 while(rs.next()){
+				            	
+				 	db_type = rs.getString("type");
+				 	db_value = rs.getString("content");
+				 	fields1.add(db_type);
+				 	values1.add(db_value);
+		
+				 }
+			 } catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			 }
+	    
+			 
+			 
+	 		for(int i = 0; i < values1.size(); i++) {
+	 			String type = fields1.get(i);
+	 			String value = values1.get(i);
+	 			
+	 			res += "<li> <b>" + type + "</b> " + value +  "</li>";
+	 		}
+	 		res+= "</ul></p></body></html>";
+	 	    response.setContentType("text/html");
+	 	    response.getWriter().println(res);
+		}
 	 }
 	
 	 

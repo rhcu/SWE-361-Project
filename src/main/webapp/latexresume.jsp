@@ -67,32 +67,40 @@ function addExperienceField(v){
 	currentField = "#experienceField-"+v;
 	$(currentField).append("<input width='100%' class='form-control' name='title-"+v+"' placeholder='Title'><br>");
 	$(currentField).append("<input width='100%' class='form-control' type='text' name='company-"+v+"' placeholder='Company'><br>");
-	$(currentField).append("<input width='100%' class='form-control' type='text' name='dates-"+v+"'='dates-"+v+"' placeholder='Dates'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
 	$(currentField).append("<input width='100%' class='form-control' type='text' name='location-"+v+"' placeholder='Location'><br>");
 	$(currentField).append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
 	$(currentField).append("<input type='button' id='deleteExperience' data-num='"+v+"' value='Delete'>");
 	$(currentField).append("<hr>");
 }
 
-function addEducationField(){
-	var v = education_num.toString();
-	$("#education").append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='degree-"+v+"' placeholder='Degree type'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
-	$("#education").append("<input width='100%' class='form-control' type='text' name='ed-dates-"+v+"' placeholder='Dates'><br>");
-	$("#education").append("<textarea width='100%' class='form-control' name='ed-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
-	$("#education").append("<hr>");
-
-	education_num += 1;
+function addEducationField(v){
+	if(!v){
+		v = education_num + 1;
+	}
+	$("#education").append("<div id='educationField-"+v+"'></div>");
+	currentField = "#educationField-"+v;
+	
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='school-"+v+"' placeholder='School'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='type-"+v+"' placeholder='Degree type'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='major-"+v+"' placeholder='Major'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates'><br>");
+	$(currentField).append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description'></textarea><br>");
+	$(currentField).append("<input type='button' id='deleteEducation' data-num='"+v+"' value='Delete'>");
+	$(currentField).append("<hr>");
 }
-function addProjectField(){
-	var v = project_num.toString();
-	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-name-"+v+"' placeholder='Name'><br>");
-	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-url-"+v+"' placeholder='URL to project (optional)'><br>");
-	$("#projects").append("<input width='100%' class='form-control' type='text' name='project-dates-"+v+"' placeholder='Dates of creation'><br>");
-	$("#projects").append("<textarea width='100%' class='form-control' name='project-description-"+v+"' placeholder='Description (optional)'></textarea><br>");
-	$("#projects").append("<hr>");
-	project_num += 1;
+function addProjectField(v){
+	if(!v){
+		v = project_num + 1;
+	}
+	$("#project").append("<div id='projectField-"+v+"'></div>");
+	currentField = "#projectField-"+v;
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='name-"+v+"' placeholder='Name'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='url-"+v+"' placeholder='URL to project (optional)'><br>");
+	$(currentField).append("<input width='100%' class='form-control' type='text' name='dates-"+v+"' placeholder='Dates of creation'><br>");
+	$(currentField).append("<textarea width='100%' class='form-control' name='description-"+v+"' placeholder='Description of the project'></textarea><br>");
+	$(currentField).append("<input type='button' id='deleteProject' data-num='"+v+"' value='Delete'>");
+	$(currentField).append("<hr>");
 }
 function getNum(obj){
 	for(var key in obj){
@@ -116,8 +124,8 @@ function getExperience(){
 		    	addExperienceField(num)
 				for (var key in obj) {
 			    	if (obj.hasOwnProperty(key)) {
-				    	$( "input[name='"+key+"']" ).val(obj[key]);
-				    	$( "textarea[name='"+key+"']" ).val(obj[key]);
+				    	$( "#experience input[name='"+key+"']" ).val(obj[key]);
+				    	$( "#experience textarea[name='"+key+"']" ).val(obj[key]);
 				    }
 				}
 			}
@@ -130,6 +138,85 @@ function getExperience(){
 	});
 }
 
+function getEducation(){
+	$.ajax({
+	    url: "education",
+	    cache: false,
+	    type: "GET",
+	    dataType: 'json',
+	    success: function(response) {;
+			var max_education = 0;
+			for(var i = 0; i < response.length;i++){
+				var obj = response[i];
+		    	console.log(obj);
+		    	var num = getNum(obj);
+		    	max_education = Math.max(max_education, parseInt(num, 10));
+		    	addEducationField(num)
+				for (var key in obj) {
+			    	if (obj.hasOwnProperty(key)) {
+				    	$( "#education input[name='"+key+"']" ).val(obj[key]);
+				    	$( "#education textarea[name='"+key+"']" ).val(obj[key]);
+				    }
+				}
+			}
+			education_num = max_education + 1;
+			addEducationField((max_education + 1).toString());
+	    },
+	    error: function(xhr) {
+
+	    }
+	});
+}
+function getProject(){
+	$.ajax({
+	    url: "project",
+	    cache: false,
+	    type: "GET",
+	    dataType: 'json',
+	    success: function(response) {;
+			var max_project = 0;
+			for(var i = 0; i < response.length;i++){
+				var obj = response[i];
+		    	console.log(obj);
+		    	var num = getNum(obj);
+		    	max_project = Math.max(max_project, parseInt(num, 10));
+		    	addProjectField(num)
+				for (var key in obj) {
+			    	if (obj.hasOwnProperty(key)) {
+				    	$( "#project input[name='"+key+"']" ).val(obj[key]);
+				    	$( "#project textarea[name='"+key+"']" ).val(obj[key]);
+				    }
+				}
+			}
+			education_num = max_project + 1;
+			addProjectField((max_project + 1).toString());
+	    },
+	    error: function(xhr) {
+
+	    }
+	});
+}
+function getSkills(){
+	$.ajax({
+	    url: "skills",
+	    cache: false,
+	    type: "GET",
+	    dataType: 'json',
+	    success: function(response) {;
+				var obj = response;
+		    	console.log(obj);
+		    
+		    	for (var key in obj) {
+			    	if (obj.hasOwnProperty(key)) {
+				    	$( "#skills input[name='"+key+"']" ).val(obj[key]);
+				    }
+				}
+	    },
+	    error: function(xhr) {
+
+	    }
+	});
+}
 
 
 $( document ).ready(function() {
@@ -153,7 +240,64 @@ $( document ).ready(function() {
 	           }
 	    });
 	});
+	$("#educationForm").submit(function(e) {
+		e.preventDefault();
+	    var form = $(this);
+	    var url = form.attr('action');
+
+		console.log(form.serialize());
+	    $.ajax({
+	           type: "post",
+	           url: url,
+
+	           data: form.serialize(),
+	           success: function(data)
+	           {
+	        	   $("#education").empty();
+
+	        	   getEducation();
+	           }
+	    });
+	});
+	$("#projectForm").submit(function(e) {
+		e.preventDefault();
+	    var form = $(this);
+	    var url = form.attr('action');
+
+		console.log(form.serialize());
+	    $.ajax({
+	           type: "post",
+	           url: url,
+
+	           data: form.serialize(),
+	           success: function(data)
+	           {
+	        	   $("#project").empty();
+
+	        	   getProject();
+	           }
+	    });
+	});
+	$("#skillsForm").submit(function(e) {
+		e.preventDefault();
+	    var form = $(this);
+	    var url = form.attr('action');
+
+		console.log(form.serialize());
+	    $.ajax({
+	           type: "post",
+	           url: url,
+
+	           data: form.serialize(),
+	           success: function(data)
+	           {
+	           }
+	    });
+	});
 	getExperience();
+	getEducation();
+	getProject();
+	getSkills();
 	//addExperienceField();
     //addEducationField();
     //addProjectField();
@@ -175,6 +319,40 @@ $( document ).ready(function() {
 	        }
 	   });
 	});
+	$("#education").on("click","#deleteEducation", function(e){
+		num = $(this).attr("data-num");
+		deleteButton = $(this);
+		$.ajax({
+	        type: "post",
+	        url: "education",
+	        data: {
+	        	"method": "delete",
+	        	"num": num
+	        }, // serializes the form's elements.
+	        success: function(data)
+	        {
+	        	$("#educationField-"+num).remove();
+	        }
+	   });
+	});
+	
+	$("#project").on("click","#deleteProject", function(e){
+		num = $(this).attr("data-num");
+		deleteButton = $(this);
+		$.ajax({
+	        type: "post",
+	        url: "project",
+	        data: {
+	        	"method": "delete",
+	        	"num": num
+	        }, // serializes the form's elements.
+	        success: function(data)
+	        {
+	        	$("#projectField-"+num).remove();
+	        }
+	   });
+	});
+	
 });
 
 
@@ -246,8 +424,6 @@ $( document ).ready(function() {
 </ul>
  
 <form action="experience" id="experienceForm" method="post">
-<div id="education">
-</div>
 <!-- <input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()"> -->
 <br>
 <div id = "experience">
@@ -255,15 +431,41 @@ $( document ).ready(function() {
 <input class="btn btn-info"  type="button" value="Add experience" onclick="addExperienceField()">
 <br>
 <input class="btn btn-info"  type="submit" value="Save experience">
-<div id="projects">
-</div>
-<br>
-<!-- <input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">  -->
 <br>
 </form>
+
+<form action="education" id="educationForm" method="post">
+<div id = "education">
+</div>
+<input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()">
+<br>
+<input class="btn btn-info"  type="submit" value="Save education">
+<br>
+</form>
+
+<form action="project" id="projectForm" method="post">
+<div id = "project">
+</div>
+<input class="btn btn-info"  type="button" value="Add project" onclick="addProjectField()">
+<br>
+<input class="btn btn-info"  type="submit" value="Save project">
+<br>
+</form>
+
+<form action="skills" id="skillsForm" method="post">
+<div id = "skills">
+<input type="text" name="skills" value="" placeholder="Your skills">
+</div>
+<input class="btn btn-info"  type="submit" value="Save skills">
+<br>
+</form>
+
+
+
 <form action="latexresume" method="post">
 <input class="btn btn-success" type="submit" value="Convert to PDF">
 </form>
+<a href="logout">Logout</a>
 <!-- <button class="btn" type="submit" value="logout">Logout</button> -->
 
 </div>

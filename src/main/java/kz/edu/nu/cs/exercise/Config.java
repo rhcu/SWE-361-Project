@@ -6,12 +6,12 @@ import java.util.Base64;
 
 
 public class Config {
-	/*
-	private static String host = "localhost";
+	
+	/*private static String host = "localhost";
 	private static String database = "cv";
 	private static String user = "root";
-	private static String password = ""; */
-	
+	private static String password = ""; 
+	*/
 	private static String host = "10.10.3.14";
 	private static String database = "testdatabase361";
 	private static String user = "user361";

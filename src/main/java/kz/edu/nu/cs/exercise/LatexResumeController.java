@@ -55,18 +55,20 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		User u = new User(username);
 		String main = "";
 		main += this.head;
+		
 		main += "\\name{"+u.getName()+" "+u.getLastname()+"} % Your name\n" + 
 				"\n" + 
 				"\\address{"+u.getAddr()+"}\n" + 
 				"\n" + 
 				"\\begin{document}";
+		List<String> fields = new ArrayList<String>();
+		fields.add("username");
+		List<String> values = new ArrayList<String>();
+		values.add(username);
+		 
 		main += "\\begin{rSection}{Experience}";
 		
 			 ExperienceModel expModel = new ExperienceModel(username);
-			 List<String> fields = new ArrayList<String>();
-			 fields.add("username");
-			 List<String> values = new ArrayList<String>();
-			 values.add(username);
 			 ResultSet rs = expModel.findWhere(fields, values);
 			 while(rs != null) {
 				 if(rs == null) {
@@ -88,7 +90,69 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				 }
 				 rs.next();
 			 }
-			 
+		main += "\\end{rSection}\n";
+		main += "\\begin{rSection}{Education}";
+			EducationModel edModel = new EducationModel(username);
+			rs = edModel.findWhere(fields, values);
+			while(rs != null) {
+				 if(rs == null) {
+					 edModel.disconnect();
+					 break;
+				 }
+				 if(rs.isAfterLast()) break;
+				 String num = rs.getString("num");
+				 
+				 String school = rs.getString("school");
+				 String type = rs.getString("type");
+				 String dates = rs.getString("dates");
+				 String description = rs.getString("description");
+				 String major = rs.getString("major");
+				 if(school != null && type != null && major != null && dates!= null && description!= null) {
+					 main += "{\\bf "+school+"} \\hfill {\\em "+dates+"} \\\\ \n" + 
+						 		""+type+" in "+major+".\\\\\n" + 
+						 		description+".\\\\";
+				 }
+				 rs.next();
+			 }
+		main += "\\end{rSection}\n";
+		main += "\\begin{rSection}{Projects}";
+			ProjectModel projectModel = new ProjectModel(username);
+			rs = projectModel.findWhere(fields, values);
+			while(rs != null) {
+				 if(rs == null) {
+					 projectModel.disconnect();
+					 break;
+				 }
+				 if(rs.isAfterLast()) break;
+				 String num = rs.getString("num");
+				 
+				 String name = rs.getString("name");
+				 String url = rs.getString("url");
+				 String dates = rs.getString("dates");
+				 String description = rs.getString("description");
+				 if(name != null && url != null && dates!= null && description!= null) {
+					 main += "\\begin{rSubsection}{"+name+"}{\\url{"+url+"}}{"+dates+"}{}\n" + 
+							 "\\item "+description +"\\end{rSubsection}" ;
+				 }
+				 rs.next();
+			 }
+		main += "\\end{rSection}\n";
+		
+		
+		main += "\\begin{rSection}{Skills}";
+			SkillsModel skillsModel = new SkillsModel(username);
+			rs = skillsModel.findWhere(fields, values);
+			while(rs != null) {
+				 if(rs == null) {
+					 skillsModel.disconnect();
+					 break;
+				 }
+				 if(rs.isAfterLast()) break;
+				 String skills = rs.getString("content");
+				 main += "\\item " + skills;
+				 rs.next();
+			}
+				
 		main += "\\end{rSection}\n";
 		/*
 		main += "\\begin{rSection}{Education}";
@@ -261,6 +325,7 @@ protected String generate(String main) throws IOException, InterruptedException 
 	    //System.out.println(line);
 	    laton_content += line + "\n";
 	  }
+	 System.out.println(laton_content);
 	 //pr.wait();
 	 /*pr.waitFor();
 	 pr = rt.exec("."+laton +" "+ mainPath + " " + clsPath);*/
