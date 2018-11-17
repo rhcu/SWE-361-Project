@@ -187,25 +187,10 @@ span {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  height: calc(100vh - 40px);
-  background: url(../img/hero-bg.png) center bottom no-repeat;
-  background-size: 100%;
-  position: relative;
-  margin-top: 40px;
-}
 
-@media (min-width: 1025px) {
-  #hero {
-    background-attachment: fixed;
-  }
-}
 
 #hero .hero-container {
   position: absolute;
-  bottom: 0;
-  top: 0;
   left: 0;
   right: 0;
   display: flex;
@@ -216,12 +201,11 @@ span {
 }
 
 #hero h1 {
-  margin: 0 0 10px 0;
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
   font-family: "Philosopher", sans-serif;
-  color: #71c55d;
+  color: white;
 }
 
 @media (max-width: 768px) {
@@ -232,8 +216,7 @@ span {
 }
 
 #hero h2 {
-  color: #777;
-  margin-bottom: 30px;
+  color: white;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
@@ -243,14 +226,9 @@ span {
   #hero h2 {
     font-size: 18px;
     line-height: 24px;
-    margin-bottom: 30px;
   }
 }
 
-#hero img {
-  max-width: 95%;
-  margin-bottom: 30px;
-}
 
 #hero .btn-get-started {
   font-family: "Roboto", sans-serif;
@@ -265,17 +243,17 @@ span {
   margin-bottom: 30px;
   border: 2px solid #71c55d;
   background: #fff;
-  color: #71c55d;
+  color: white;
   text-decoration: none;
 }
 
 #hero .btn-get-started:hover {
   background: #71c55d;
-  color: #fff;
+  color: white;
 }
 
 #hero .btns a {
-  color: #555;
+  color: white;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -291,7 +269,7 @@ span {
 }
 
 #hero .btns a:hover {
-  color: #71c55d;
+  color: white;
 }
 
 /*--------------------------------------------------------------

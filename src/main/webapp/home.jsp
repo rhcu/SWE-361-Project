@@ -12,7 +12,8 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
-
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        
         <!-- Bootstrap css -->
         <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -119,7 +120,7 @@
             </div>
                 <a class="btn" href="latexresume?username=<%=userName%>">Create CV </a>
 		 
-            	<button class="btn" type="submit" value="logout">Logout</button>
+            	<button class="btn" type="submit" value="logout">Logout <span class="glyphicon glyphicon-log-out"></span></button>
             </div>
     </body>
     </html>
