@@ -28,10 +28,6 @@ import com.google.gson.Gson;
  */
 @WebServlet(urlPatterns = { "/admin_panel" })
 public class AdminController extends HttpServlet {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	List<String> fields = new ArrayList<String>();
 	List<String> values = new ArrayList<String>();
@@ -80,9 +76,6 @@ public class AdminController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			 }
-	    
-			 
-			 
 	 		for(int i = 0; i < values1.size(); i++) {
 	 			String type = fields1.get(i);
 	 			String value = values1.get(i);
@@ -135,17 +128,6 @@ public class AdminController extends HttpServlet {
 	            }
 	           
 	            doGet(request, response);
-	            
-//	            Gson gson = new Gson();
-//				out.append(gson.toJson(values));
-	            //RequestDispatcher rd = request.getRequestDispatcher("admin_panel.jsp?logs=" + values);
-	            //rd.include(request, response);
-//	            for (int j = 0; j < values.size(); j++) {
-//	                
-//	                out.append(values.get(j));
-//	                
-//	            }
-	            
 	            rs.close();
        			conn.close();
 

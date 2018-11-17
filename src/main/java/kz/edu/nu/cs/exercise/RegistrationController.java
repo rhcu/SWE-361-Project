@@ -57,6 +57,7 @@ public class RegistrationController extends HttpServlet {
 	     }
 	   
 	   LogModel log = null;
+	   
 	   try {
 	    log = new LogModel();
 	   } catch (SQLException e) {
@@ -107,8 +108,6 @@ public class RegistrationController extends HttpServlet {
 		     } catch (Exception ex) {//SQLException
 		          // handle any errors
 		          System.out.println("SQLException: " + ex.getMessage());
-//		          System.out.println("SQLState: " + ex.getSQLState());
-//		          System.out.println("VendorError: " + ex.getErrorCode());
 		          RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
 		        request.setAttribute("error", ex.getMessage());
 		          out.println("<font color=red>" + ex.getMessage() + "</font>");
@@ -125,8 +124,3 @@ public class RegistrationController extends HttpServlet {
 		    }  
 		  }
 		}
-		      
-		      
-		      
-
-	   

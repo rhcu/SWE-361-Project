@@ -95,6 +95,11 @@
   				padding: 11px 36px;
   				border-radius: 50px;
             }
+            
+            div.cont {
+            	text-align: center;
+            	margin-top: 35px;
+            }
         </style>
         <script src="scripts/jquery.min.js">
         </script>
@@ -109,13 +114,15 @@
                 }
                 $("#experience").append("<div id='experienceField-" + v + "'></div>");
                 currentField = "#experienceField-" + v;
+                $(currentField).append("<br>");
                 $(currentField).append("<input width='100%' class='form-control' name='title-" + v + "' placeholder='Title'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='company-" + v + "' placeholder='Company'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='dates-" + v + "' placeholder='Dates'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='location-" + v + "' placeholder='Location'><br>");
                 $(currentField).append("<textarea width='100%' class='form-control' name='description-" + v + "' placeholder='Description'></textarea><br>");
+                $(currentField).append("<br>");
                 $(currentField).append("<input type='button' class ='deleteButton' id='deleteExperience' data-num='" + v + "' value='Delete'>");
-                
+                $(currentField).append("<br>");
             }
 
             function addEducationField(v) {
@@ -124,13 +131,15 @@
                 }
                 $("#education").append("<div id='educationField-" + v + "'></div>");
                 currentField = "#educationField-" + v;
+                $(currentField).append("<br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='school-" + v + "' placeholder='School'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='type-" + v + "' placeholder='Degree type'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='major-" + v + "' placeholder='Major'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='dates-" + v + "' placeholder='Dates'><br>");
                 $(currentField).append("<textarea width='100%' class='form-control' name='description-" + v + "' placeholder='Description'></textarea><br>");
+                $(currentField).append("<br>");
                 $(currentField).append("<input type='button' class ='deleteButton' id='deleteEducation' data-num='" + v + "' value='Delete'>");
-                
+                $(currentField).append("<br>");
             }
 
             function addProjectField(v) {
@@ -139,12 +148,14 @@
                 }
                 $("#project").append("<div id='projectField-" + v + "'></div>");
                 currentField = "#projectField-" + v;
+                $(currentField).append("<br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='name-" + v + "' placeholder='Name'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='url-" + v + "' placeholder='URL to project (optional)'><br>");
                 $(currentField).append("<input width='100%' class='form-control' type='text' name='dates-" + v + "' placeholder='Dates of creation'><br>");
                 $(currentField).append("<textarea width='100%' class='form-control' name='description-" + v + "' placeholder='Description of the project'></textarea><br>");
+                $(currentField).append("<br>");
                 $(currentField).append("<input type='button' class ='deleteButton' id='deleteProject' data-num='" + v + "' value='Delete'>");
-               
+                $(currentField).append("<br>");
             }
 
             function getNum(obj) {
@@ -414,19 +425,18 @@
         String userName=request.getAttribute( "userName").toString(); 
         String addr=request.getAttribute( "addr").toString(); 
         String age=request.getAttribute( "age").toString(); %>
-            <br>
-            <br>
-			
-	<br><br><br><br><br><br>
-            <section id="hero" class="wow fadeIn">
-                <div class="hero-container">
-                    <h2 color="white">Hi <%= firstname %> <%=lastname %>. <br> Please, fill the following fields with relevant information about your experience, etc. 
+            
+            
+            
+                <div class="cont">
+                <br><br><br>
+                    <h2>Hi <%= firstname %> <%=lastname %>. <br> Please, fill the following fields with relevant information about your experience, etc. 
                     <br>Press "Save" button once you finished the field, and "Convert to PDF" when all the fields are filled.</h2>
-                    <a class="logoutbtn" href="logout" color="red">Logout <span class="glyphicon glyphicon-log-out"></span></a>
-                    
+                    <br><br>
+                    <a class="logoutbtn" href="logout">Logout <span class="glyphicon glyphicon-log-out"></span></a>
+                    <br>
 					
                     <form action="experience" id="experienceForm" method="post">
-                        <!-- <input class="btn btn-info"  type="button" value="Add education" onclick="addEducationField()"> -->
                         <br>
                         <div id="experience">
                         </div>
@@ -452,9 +462,11 @@
                     </form>
 
                     <form action="skills" id="skillsForm" method="post">
+                    <br>
                         <div id="skills">
                             <input type="text" class='form-control' name="skills" value="" placeholder="Your skills">
                         </div>
+                        <br>
                         <input class="btn btn-info" type="submit" value="Save skills">
                         <br>
                     </form>
@@ -462,7 +474,6 @@
                         <input class="btn btn-success" type="submit" value="Convert to PDF">
                     </form>
                 </div>
-            </section>
     </body>
 
     </html>

@@ -113,7 +113,6 @@ public class ExperienceController extends HttpServlet {
 		JSONArray arr = new JSONArray();
 		if(username != null) {
 				 
-				 //String num = Integer.toString(i);
 				 ExperienceModel model = null;
 				 try {
 					model = new ExperienceModel(username);
@@ -123,13 +122,10 @@ public class ExperienceController extends HttpServlet {
 				}
 				 List<String> fields = new ArrayList<String>();
 				 fields.add("username");
-				 //fields.add("num");
 				 List<String> values = new ArrayList<String>();
 				 values.add(username);
-				 //values.add(num);
 				 try {
 					ResultSet rs = model.findWhere(fields, values);
-					//if(rs!= null) {
 						while(rs != null) {
 
 							JSONObject obj = new JSONObject();
@@ -143,7 +139,6 @@ public class ExperienceController extends HttpServlet {
 							arr.add(obj);
 							rs.next();
 						}
-					//}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

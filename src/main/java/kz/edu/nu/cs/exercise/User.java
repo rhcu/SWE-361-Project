@@ -35,7 +35,7 @@ public class User {
 	         // broken Java implementations
 	         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 	     } catch (Exception ex) {
-	         // handle the errorr
+	         // handle the error
 	    	 System.out.println(ex.getMessage());
 	     }
 		 

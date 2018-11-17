@@ -139,4 +139,3 @@ public class SkillsController extends HttpServlet {
 		out.write(result.getBytes());
 	}
 }
-	

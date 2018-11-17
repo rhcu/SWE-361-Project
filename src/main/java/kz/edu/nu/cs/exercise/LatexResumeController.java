@@ -71,10 +71,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			 ExperienceModel expModel = new ExperienceModel(username);
 			 ResultSet rs = expModel.findWhere(fields, values);
 			 while(rs != null) {
-				 if(rs == null) {
-					 expModel.disconnect();
-					 break;
-				 }
 				 if(rs.isAfterLast()) break;
 				 String num = rs.getString("num");
 				 
@@ -95,10 +91,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			EducationModel edModel = new EducationModel(username);
 			rs = edModel.findWhere(fields, values);
 			while(rs != null) {
-				 if(rs == null) {
-					 edModel.disconnect();
-					 break;
-				 }
 				 if(rs.isAfterLast()) break;
 				 String num = rs.getString("num");
 				 
@@ -119,10 +111,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			ProjectModel projectModel = new ProjectModel(username);
 			rs = projectModel.findWhere(fields, values);
 			while(rs != null) {
-				 if(rs == null) {
-					 projectModel.disconnect();
-					 break;
-				 }
 				 if(rs.isAfterLast()) break;
 				 String num = rs.getString("num");
 				 
@@ -143,10 +131,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			SkillsModel skillsModel = new SkillsModel(username);
 			rs = skillsModel.findWhere(fields, values);
 			while(rs != null) {
-				 if(rs == null) {
-					 skillsModel.disconnect();
-					 break;
-				 }
 				 if(rs.isAfterLast()) break;
 				 String skills = rs.getString("content");
 				 main += "\\item " + skills;
@@ -154,51 +138,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			}
 				
 		main += "\\end{rSection}\n";
-		/*
-		main += "\\begin{rSection}{Education}";
-		
-		for(int i = 1; i < 100; i++) {
-			 String num = Integer.toString(i);
-			 String school = request.getParameter("school-" + num);
-			 String degree = request.getParameter("degree-" + num);
-			 String dates = request.getParameter("ed-dates-" + num);
-			 String description = request.getParameter("ed-description-" + num);
-			 String major = request.getParameter("major-" + num);
-			 
-			 if(school != null && degree != null && dates!= null && major != null) {
-				 if(description == null) description = "";
-				 main += "{\\bf "+school+"} \\hfill {\\em "+dates+"} \\\\ \n" + 
-				 		""+degree+" in "+major+".\\\\\n" + 
-				 		description;
-			 }else {
-				 break;
-			 }
-		 }
-		
-		main += "\\end{rSection}\n";
-		
-		main += "\\begin{rSection}{Projects}";
-		
-		for(int i = 1; i < 100; i++) {
-			 String num = Integer.toString(i);
-			 String name = request.getParameter("project-name-" + num);
-			 String dates = request.getParameter("project-dates-" + num);
-			 String URL = request.getParameter("project-url-" + num);
-			 String description = request.getParameter("project-description-" + num);
-			 
-			 if(name != null && dates!= null && description != null) {
-				 if(URL == null) URL = "";
-				 main += "\\begin{rSubsection}{"+name+"}{\\url{"+URL
-				 		+ "}}{"+dates+"}{}\n" + 
-				 		description+"\\end{rSubsection}";
-			 }else {
-				 break;
-			 }
-		}
-		
-		main += "\\end{rSection}\n";
-		*/
-		
 		main += this.foot;
 		
 		System.out.println(main);

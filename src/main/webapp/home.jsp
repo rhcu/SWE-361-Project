@@ -120,7 +120,8 @@
             </div>
                 <a class="btn" href="latexresume?username=<%=userName%>">Create CV </a>
 		 
-            	<button class="btn" type="submit" value="logout">Logout <span class="glyphicon glyphicon-log-out"></span></button>
+            	<a class="btn" href="logout">Logout <span class="glyphicon glyphicon-log-out"></span></a>
+                    
             </div>
     </body>
     </html>

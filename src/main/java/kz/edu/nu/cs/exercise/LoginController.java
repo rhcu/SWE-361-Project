@@ -61,10 +61,6 @@ public class LoginController extends HttpServlet {
 	        String db_username = null;
 	        boolean found = false;
 	        String db_password = null;
-	        
-//            boolean matches = db_password.equals(pass+"enc");
-//            System.out.println("Original password: " + db_password);
-           
 	            String query = "SELECT userName, pass FROM student;";
 	            stmt.executeQuery(query);
 	            ResultSet rs = stmt.getResultSet();
