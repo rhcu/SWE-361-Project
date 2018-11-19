@@ -178,7 +178,18 @@ div.ex{
 	text-align: center;
 	width: 50%;
 	margin:0 auto;
+<<<<<<< HEAD
+=======
+	background-color: black;
+ 	opacity: 0.6;
+
 }
+section.registerform {
+	text-align: center;
+	margin-top: 350px;
+>>>>>>> addeefd05f093add38718cee2d2760b9c0ec544c
+}
+
 h1 {
 	color: #26AEF2;
 }
@@ -187,10 +198,14 @@ h1 {
 	color: white;
 }
 
+
 </style>
 <body>
 
   <section class="registerform">
+
+  <h1>Registration Form</h1>
+
 	<div class="ex">
 		<form action="RegistrationController" method="post">
 			<ul id="nat">
@@ -204,6 +219,12 @@ h1 {
 					<li>Username</li>
 					<li><input type="text" name="username" /></li>
 					<li>Password</li>
+<<<<<<< HEAD
+=======
+
+					<li><input type="password" name="password" /></li>
+
+>>>>>>> addeefd05f093add38718cee2d2760b9c0ec544c
 					<li><input type="text" name="password" /></li>
 				</div>
 				<div>
@@ -212,6 +233,18 @@ h1 {
 					<li>Age</li>
 					<li><input type="text" name="age" /></li>
 				</div>
+				<div>
+					<li>Photo</li>
+					<li><input type="file" name="photo" /></li>
+				</div>	
+			</ul>
+			<button type="button" class="btn">Register</button>		
+<!-- 			<input type="submit" value="Register" />
+ -->		</form>
+		<br>
+  </section>
+<!-- 
+
 				<div>
 					<li>Photo</li>
 					<li><input type="file" name="photo" /></li>
