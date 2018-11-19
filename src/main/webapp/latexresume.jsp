@@ -62,6 +62,17 @@
     			font-size: 28px;
     			line-height: 36px;
         	}
+        	span.txt {
+        		color: white;
+        		background: #9370DB;
+  				transition: all 0.5s ease-in-out 0s;
+    			font-size: 22px;
+    			line-height: 36px;
+    			border: 1px solid #fff;
+  				border-radius: 50px;
+  				padding: 15px 40px;
+  				margin-top: 30px;
+        	}
             .btn {
                 background-color: #26AEF2;
                 cursor: pointer;
@@ -84,7 +95,16 @@
                 flex: 33.33%;
                 padding: 5px;
             }
-            
+            div.formborder{
+            	border-style: solid;
+            	color: white;
+            	margin-left: 250px;
+            	margin-right: 250px;
+            	margin-top: 25px;
+            	align: center;
+            	margin-bottom: 10px;
+            	padding: 1em;
+            }
             ul#nat li {
                 list-style-type: none;
             }
@@ -435,16 +455,22 @@
                     <br><br>
                     <a class="logoutbtn" href="logout">Logout <span class="glyphicon glyphicon-log-out"></span></a>
                     <br>
+					<div class="formborder" >
+					<br>
+					<span class="txt">Fill your experience here: </span>
+                    	<form action="experience" id="experienceForm" method="post">
+                        	<br>
+	                        <div id="experience">
+	                        </div>
+                        	<input class="btn btn-info" type="button" value="Add experience" onclick="addExperienceField()">
+                        	<input class="btn btn-info" type="submit" value="Save experience">
+                        	<br>
+                    	</form>
+					</div>
 					
-                    <form action="experience" id="experienceForm" method="post">
-                        <br>
-                        <div id="experience">
-                        </div>
-                        <input class="btn btn-info" type="button" value="Add experience" onclick="addExperienceField()">
-                        <input class="btn btn-info" type="submit" value="Save experience">
-                        <br>
-                    </form>
-
+					<div class="formborder" >
+					<br>
+					<span class="txt">Fill your education here: </span>
                     <form action="education" id="educationForm" method="post">
                         <div id="education">
                         </div>
@@ -452,7 +478,11 @@
                         <input class="btn btn-info" type="submit" value="Save education">
                         <br>
                     </form>
-
+					</div>
+					
+					<div class="formborder" >
+					<br>
+					<span class="txt">Fill your projects here: </span>
                     <form action="project" id="projectForm" method="post">
                         <div id="project">
                         </div>
@@ -460,7 +490,11 @@
                         <input class="btn btn-info" type="submit" value="Save project">
                         <br>
                     </form>
-
+					</div>
+					
+					<div class="formborder" >
+					<br>
+					<span class="txt">Fill your skills here: </span>
                     <form action="skills" id="skillsForm" method="post">
                     <br>
                         <div id="skills">
@@ -470,6 +504,7 @@
                         <input class="btn btn-info" type="submit" value="Save skills">
                         <br>
                     </form>
+                    </div>
                     <form action="latexresume" method="post">
                         <input class="btn btn-success" type="submit" value="Convert to PDF">
                     </form>
