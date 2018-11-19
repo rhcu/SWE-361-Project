@@ -118,10 +118,12 @@
             	<br>
             	<br>
             </div>
+            <div>
                 <a class="btn" href="latexresume?username=<%=userName%>">Create CV </a>
 		 
             	<a class="btn" href="logout">Logout <span class="glyphicon glyphicon-log-out"></span></a>
                     
             </div>
+           
     </body>
     </html>

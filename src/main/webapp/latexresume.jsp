@@ -473,6 +473,9 @@
                     <form action="latexresume" method="post">
                         <input class="btn btn-success" type="submit" value="Convert to PDF">
                     </form>
+                    <form action="latex2resume" method="post">
+                        <input class="btn btn-success" type="submit" value="Convert to PDF (CV2 template)">
+                    </form>
                 </div>
     </body>
 
