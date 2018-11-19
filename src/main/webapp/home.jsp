@@ -10,9 +10,67 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
 
+<<<<<<< HEAD
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Roboto:100,300,400,500,700|Philosopher:400,400i,700,700i" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+=======
+  <!-- Libraries CSS Files -->
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/modal-video/css/modal-video.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+<title>Display</title>
+<style>
+body {
+text-align: center;
+}
+
+.btn {
+        background-color:red;
+        cursor:pointer;
+    }
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.imagecircle {
+	border-radius: 50%
+}
+
+ul#nat li {
+	list-style-type: none;
+/* 	font-size: 20px;	
+ */}
+
+.bio {
+	background-color: #26AEF2;
+	display: inline-block;
+	padding: 20px;
+	width: 80%;
+}
+
+
+</style>
+</head>
+<body>  
+<header id="header" class="header header-hide">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <img src="img/logo.png" width="180" height="60" alt="">
+>>>>>>> addeefd05f093add38718cee2d2760b9c0ec544c
         
         <!-- Bootstrap css -->
         <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
@@ -102,6 +160,7 @@
 	String age = request.getParameter("age");
 	
 %>
+<<<<<<< HEAD
       
 <div class="loginform">
 	<h2>Hi <%= firstname %> <%= lastname %>. Happy to see you here!</h2>
@@ -127,3 +186,62 @@
            
     </body>
     </html>
+=======
+<br>
+<br>
+
+      <h2>Hi, <%= firstname %>. Happy to see you here!</h2>
+      <div class="bio">
+<ul id ="nat">
+<div>
+<li>
+	<p>First Name: <%= firstname %></p>
+	
+</li>
+<li>
+	<p>Last Name: <%= lastname %></p>
+</li>
+</div>
+<div>
+<li>
+	<p>User Name: <%= userName %></p>
+	
+</li>
+<li>
+	<p>Address: <%= addr %></p>
+	
+</li>
+<li>
+	<p>Age: <%= age %></p>
+
+</li>
+</div>
+<!-- <li>
+	<img src="img/profile.png" class="imagecircle" alt="profile image" width="100" height="100">
+</li>
+ -->
+</ul>
+</div>
+<p><u>Some examples of templates that you can use: </u></p>
+<b><i>TRY AND CLICK THE TEMPLATE YOU LIKED TO START MAKING A CV</i></b>
+<div class="row">
+  <div class="column">
+  <a href="latexresume?username=<%=userName%>"><img src="img/Example1.png" alt="The 1st example" width="200px" height="400px"></a>
+  </div>
+  <div class="column">  
+	<a href="latexresume?username=<%=userName%>"><img src="img/Example2.png" alt="The 2nd example" width="200px" height="400px"></a>
+  </div>
+  <div class="column">
+	<a href="latexresume?username=<%=userName%>"><img src="img/Example3.png" alt="The 3rd example" width="200px" height="400px"></a>
+  </div>
+</div>
+<br>
+<button class="btn" type="submit" value="logout">Logout</button>
+
+<a href="/pagingexercise361/latexresume.jsp"><button class="btn">Try samples now</button></a>
+<br>
+use " <i> select * from student; </i> " in mysql client to verify it.
+
+</body>
+</html>
+>>>>>>> addeefd05f093add38718cee2d2760b9c0ec544c
