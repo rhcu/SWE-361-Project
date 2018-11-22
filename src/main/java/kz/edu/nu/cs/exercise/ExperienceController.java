@@ -96,6 +96,7 @@ public class ExperienceController extends HttpServlet {
 					}finally {
 						try {
 							model.disconnect();
+							log.disconnect();
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -145,6 +146,7 @@ public class ExperienceController extends HttpServlet {
 				} finally {
 					try {
 						model.disconnect();
+
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

@@ -268,6 +268,13 @@ protected void delete_file(String filename) {
 
         System.out.println("Failed to delete the file"); 
     } 
+
+	try {
+		log.disconnect();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 }
 protected String generate(String main) throws IOException, InterruptedException {
 

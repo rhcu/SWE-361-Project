@@ -61,7 +61,7 @@ public class SkillsController extends HttpServlet {
 				
 				  log.add("Skills",  "Skills successfully generated");
 				} catch (Exception e) {
-              try {
+						try {
 						    log.add("Skills",  "Skills failed to generate");
 						  } catch (Exception LogExc) {
 							  e.printStackTrace();
@@ -70,6 +70,7 @@ public class SkillsController extends HttpServlet {
 				}finally {
 					try {
 						model.disconnect();
+						log.disconnect();
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}

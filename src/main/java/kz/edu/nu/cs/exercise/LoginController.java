@@ -29,8 +29,7 @@ public class LoginController extends HttpServlet {
 	 try {
          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
      } catch (Exception ex) {
-         // handle the errorr
-    	 System.out.println("AAAAA");
+         // handle the error
     	 System.out.println(ex.getMessage());
      }
 	 LogModel log = null;
@@ -76,7 +75,7 @@ public class LoginController extends HttpServlet {
 	                    log.add("login", request.getParameter("username") + " successfuly entered");	                 
 	                    HttpSession session = request.getSession();
 	                    session.setAttribute("username", request.getParameter("username"));
-	                    RequestDispatcher rd = request.getRequestDispatcher("admin_panel");
+	                    RequestDispatcher rd = request.getRequestDispatcher("admin_panel.jsp");
 	                    rd.forward(request, response);
 	                }else {
 
@@ -101,6 +100,7 @@ public class LoginController extends HttpServlet {
 	            }
 	            rs.close();
        			conn.close();
+				log.disconnect();
 
 		 }catch (Exception ex) {
 			    // handle any errors

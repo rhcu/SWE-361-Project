@@ -80,6 +80,7 @@ public class EducationController extends HttpServlet {
 				}finally {
 					try {
 						model.disconnect();
+						log.disconnect();
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -149,6 +150,7 @@ public class EducationController extends HttpServlet {
 					e.printStackTrace();
 				} finally {
 					try {
+
 						model.disconnect();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block

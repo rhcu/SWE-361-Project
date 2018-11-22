@@ -78,6 +78,8 @@ public class ProjectController extends HttpServlet {
 				}finally {
 					try {
 						model.disconnect();
+
+						log.disconnect();
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
