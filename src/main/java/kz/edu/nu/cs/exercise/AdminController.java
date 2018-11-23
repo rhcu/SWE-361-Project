@@ -69,7 +69,7 @@ public class AdminController extends HttpServlet {
          String db_value = null;
          String db_data = null;
     
-         String query = "SELECT type, content, DateInserted FROM cvbuilder_logs;";
+         String query = "SELECT type, content, DateInserted FROM cvbuilder_logs ORDER BY log_id DESC;";
          stmt.executeQuery(query);
          ResultSet rs = stmt.getResultSet();
                     

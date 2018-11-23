@@ -52,7 +52,8 @@ public class EducationController extends HttpServlet {
 			if(method == null || method.equals("post")) {
 				EducationModel model = null;
 				try {
-					for(int i = 1; i < 100; i++) {
+					model = new EducationModel(username);
+					 for(int i = 1; i < 100; i++) {
 						 String num = Integer.toString(i);
 						 String school = request.getParameter("school-" + num);
 						 
@@ -65,7 +66,6 @@ public class EducationController extends HttpServlet {
 								 && description!=null && dates!=null 
 								 && type.length() > 0 && major.length() > 0 && dates.length() > 0 
 								 && description.length() > 0 && school.length() > 0) {
-							 model = new EducationModel(username);
 							 model.addOrUpdate(num, school, type, major, dates, description);
 						 }
           }
@@ -81,7 +81,7 @@ public class EducationController extends HttpServlet {
 					try {
 						model.disconnect();
 						log.disconnect();
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -97,7 +97,7 @@ public class EducationController extends HttpServlet {
 					}finally {
 						try {
 							model.disconnect();
-						} catch (SQLException e) {
+						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -152,7 +152,7 @@ public class EducationController extends HttpServlet {
 					try {
 
 						model.disconnect();
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

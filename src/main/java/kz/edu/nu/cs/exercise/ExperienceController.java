@@ -52,7 +52,8 @@ public class ExperienceController extends HttpServlet {
 			if(method == null || method.equals("post")) {
 				ExperienceModel model = null;
 				try {
-					for(int i = 1; i < 100; i++) {
+					model = new ExperienceModel(username);
+					 for(int i = 1; i < 100; i++) {
 						 String num = Integer.toString(i);
 						 String title = request.getParameter("title-" + num);
 						 
@@ -65,7 +66,6 @@ public class ExperienceController extends HttpServlet {
 								 && description!=null && location!=null &&
 								 title.length() > 0 && company.length() > 0 && dates.length() > 0 
 								 && description.length() > 0 && location.length() > 0) {
-							 model = new ExperienceModel(username);
 							 model.addOrUpdate(num, title, company, dates, location, description);
 						 }
           }
@@ -80,7 +80,7 @@ public class ExperienceController extends HttpServlet {
 				}finally {
 					try {
 						model.disconnect();
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -91,13 +91,13 @@ public class ExperienceController extends HttpServlet {
 					try {
 						model = new ExperienceModel(username);
 						model.deleteNum(num);
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}finally {
 						try {
 							model.disconnect();
 							log.disconnect();
-						} catch (SQLException e) {
+						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -140,14 +140,14 @@ public class ExperienceController extends HttpServlet {
 							arr.add(obj);
 							rs.next();
 						}
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
 					try {
 						model.disconnect();
 
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

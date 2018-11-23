@@ -11,22 +11,27 @@ import javax.servlet.http.HttpSession;
 
 public class User {
 	private ResultSet rs;
+	private String userName = "";
+	private String name = "";
+	private String lastname = "";
+	private int age = 0;
+	private String addr = "";
 	public String getUsername() throws SQLException {
-		return rs.getString("userName");
+		return userName;
 	}
 	public String getName() throws SQLException {
-		return rs.getString("name");
+		return name;
 	}
 	public String getLastname() throws SQLException {
-		return rs.getString("lastname");
+		return lastname;
 	}
 
 	public String getAddr() throws SQLException {
-		return rs.getString("addr");
+		return addr;
 	}
 
 	public int getAge() throws SQLException {
-		return rs.getInt("age");
+		return age;
 	}
 	
 	public User(String username) {
@@ -51,6 +56,14 @@ public class User {
 			ResultSet resultSet = ps.executeQuery(query);
 			resultSet.next();
 			this.rs = resultSet;
+			
+			this.userName = resultSet.getString("userName");
+			this.lastname = resultSet.getString("lastname");
+			this.name = resultSet.getString("name");
+			this.addr = resultSet.getString("addr");
+			this.age = resultSet.getInt("age");
+			resultSet.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

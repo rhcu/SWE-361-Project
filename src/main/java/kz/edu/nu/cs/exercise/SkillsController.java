@@ -71,7 +71,7 @@ public class SkillsController extends HttpServlet {
 					try {
 						model.disconnect();
 						log.disconnect();
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
@@ -87,7 +87,7 @@ public class SkillsController extends HttpServlet {
 					}finally {
 						try {
 							model.disconnect();
-						} catch (SQLException e) {
+						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -129,7 +129,7 @@ public class SkillsController extends HttpServlet {
 				} finally {
 					try {
 						model.disconnect();
-					} catch (SQLException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

@@ -52,7 +52,8 @@ public class ProjectController extends HttpServlet {
 			if(method == null || method.equals("post")) {
 				ProjectModel model = null;
 				try {
-					for(int i = 1; i < 100; i++) {
+					 model = new ProjectModel(username);
+					 for(int i = 1; i < 100; i++) {
 						 String num = Integer.toString(i);
 						 String name = request.getParameter("name-" + num);
 						 
@@ -63,7 +64,6 @@ public class ProjectController extends HttpServlet {
 						 if(name!=null && url!=null && description!=null && dates!=null 
 								 && name.length() > 0 && url.length() > 0 && dates.length() > 0 
 								 && description.length() > 0) {
-							 model = new ProjectModel(username);
 							 model.addOrUpdate(num, name, url, dates, description);
 						 }
           }

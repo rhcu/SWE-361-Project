@@ -27,9 +27,23 @@ import javax.servlet.http.HttpSession;
 public class LogoutController extends HttpServlet {
 
  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  HttpSession session = request.getSession();
-	  session.removeAttribute("username");
-	  RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+   HttpSession session = request.getSession();
+   LogModel log = null;
+   try {
+    log = new LogModel();
+  } catch (SQLException e) {
+   // TODO Auto-generated catch block
+   e.printStackTrace();
+  }
+   try {
+	   System.out.println("LOGOUT: " + request.getParameter("username"));
+  log.add("logout", session.getAttribute("username") + " successfuly logged out");
+ } catch (Exception e) {
+  // TODO Auto-generated catch block
+  e.printStackTrace();
+ }
+   session.removeAttribute("username");
+   RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
       rd.forward(request, response);
  }
 }
